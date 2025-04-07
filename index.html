@@ -100,6 +100,33 @@
       margin: 10px 0;
     }
 
+    /* 개발 진행 상황 스타일 */
+    .progress-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin-top: 30px;
+      align-items: center;
+    }
+
+    .progress-item {
+      max-width: 800px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .progress-item img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .progress-item p {
+      margin-top: 10px;
+      font-size: 1.1em;
+      color: #333;
+    }
+
     @media (min-width: 768px) {
       nav {
         position: static;
@@ -131,11 +158,11 @@
     </div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <nav id="nav">
-  <a href="#" onclick="showSection('main')">메인</a>
-  <a href="#" onclick="showSection('dev')">개발자</a>
-  <a href="#" onclick="showSection('progress')">개발 진행 상황</a>
-  <a href="#" onclick="showSection('support')">후원</a>
-</nav>
+      <a href="#" onclick="showSection('main')">메인</a>
+      <a href="#" onclick="showSection('dev')">개발자</a>
+      <a href="#" onclick="showSection('progress')">개발 진행 상황</a>
+      <a href="#" onclick="showSection('support')">후원</a>
+    </nav>
   </header>
 
   <main>
@@ -146,21 +173,44 @@
     </div>
 
     <div id="dev" class="section">
-  <h1>Developer Introduce</h1>
-  <p>Legend Piece의 개발자들</p>
-  <ul>
-    <li>
-      ❄️ <a href="https://www.roblox.com/users/2542821031/profile" target="_blank" style="color: inherit; text-decoration: none;">
-        sno_w2026
-      </a> - 기획 / 디자인 / 프로그래밍
-    </li>
-    <li>
-      🚶‍♂️ <a href="https://www.roblox.com/users/2058595138/profile" target="_blank" style="color: inherit; text-decoration: none;">
-        WALK
-      </a> - 꼽사리 끼기
-    </li>
-  </ul>
-</div>
+      <h1>Developer Introduce</h1>
+      <p>Legend Piece의 개발자들</p>
+      <ul>
+        <li>
+          ❄️ <a href="https://www.roblox.com/users/2542821031/profile" target="_blank" style="color: inherit; text-decoration: none;">
+            sno_w2026
+          </a> - 기획 / 디자인 / 프로그래밍
+        </li>
+        <li>
+          🚶‍♂️ <a href="https://www.roblox.com/users/2058595138/profile" target="_blank" style="color: inherit; text-decoration: none;">
+            WALK
+          </a> - 꼽사리 끼기
+        </li>
+      </ul>
+    </div>
+
+    <div id="progress" class="section">
+      <h1>📈 개발 진행 상황</h1>
+      <p>현재까지의 개발 진행 상황을 이미지와 함께 확인해보세요!</p>
+      <div class="progress-gallery">
+        <div class="progress-item">
+          <img src="LP1.png" alt="LP1 이미지" />
+          <p>🔹 첫 번째 테스트 맵 구현 장면</p>
+        </div>
+        <div class="progress-item">
+          <img src="LP2.png" alt="LP2 이미지" />
+          <p>🔹 전투 시스템 시연 중</p>
+        </div>
+        <div class="progress-item">
+          <img src="LP3.png" alt="LP3 이미지" />
+          <p>🔹 캐릭터 커스터마이징 UI 테스트</p>
+        </div>
+        <div class="progress-item">
+          <img src="LP4.png" alt="LP4 이미지" />
+          <p>🔹 인게임 인터페이스 개발 중</p>
+        </div>
+      </div>
+    </div>
 
     <div id="support" class="section">
       <h1>Donate</h1>
