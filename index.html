@@ -22,7 +22,7 @@
     }
 
     .logo img {
-      height: 90px; /* 로고 이미지 크기 살짝 키움 */
+      height: 90px;
     }
 
     .menu-toggle {
@@ -43,10 +43,11 @@
 
     nav a {
       color: white;
-      font-size: 18px; /* 메뉴 크기 살짝 키움 */
+      font-size: 18px;
       padding: 18px 24px;
       text-decoration: none;
       border-bottom: 1px solid #444;
+      text-align: center;
     }
 
     nav a:hover {
@@ -54,7 +55,49 @@
     }
 
     main {
-      padding: 20px;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section {
+      display: none;
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .section h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .section p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .section img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      margin-top: 20px;
+    }
+
+    .section ul {
+      list-style: none;
+      padding: 0;
+      font-size: 18px;
+    }
+
+    .section ul li {
+      margin: 10px 0;
     }
 
     @media (min-width: 768px) {
@@ -72,21 +115,12 @@
       nav a {
         border: none;
         color: white;
-        font-size: 18px; /* PC에서도 크기 유지 */
         padding: 0 20px;
       }
 
       nav a:hover {
         background-color: #555;
       }
-    }
-
-    .section {
-      display: none;
-    }
-
-    .section.active {
-      display: block;
     }
   </style>
 </head>
@@ -102,21 +136,20 @@
       <a href="#" onclick="showSection('support')">Donate</a>
     </nav>
   </header>
-    
+
   <main>
     <div id="main" class="section active">
       <h1>🎮 Legend Piece에 오신 걸 환영합니다!</h1>
       <p>이곳은 게임의 메인 소개 페이지입니다.</p>
-      <img src="LP1.png" alt="Legend Piece 스크린샷"
-        style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-top: 20px;" />
+      <img src="LP1.png" alt="Legend Piece 스크린샷" />
     </div>
 
     <div id="dev" class="section">
       <h1>👨‍💻 개발자 소개</h1>
       <p>저희는 두 명이서 Legend Piece를 개발하고 있어요!</p>
       <ul>
-        <li> ❄️ sno_w2026 - 기획 / 디자인 / 프로그래밍</li>
-        <li> 🚶‍♂️ WALK - 꼽사리 끼기 </li>
+        <li>❄️ sno_w2026 - 기획 / 디자인 / 프로그래밍</li>
+        <li>🚶‍♂️ WALK - 꼽사리 끼기</li>
       </ul>
     </div>
 
@@ -137,7 +170,6 @@
       sections.forEach(section => section.classList.remove('active'));
       document.getElementById(id).classList.add('active');
 
-      // 모바일에서는 메뉴 닫기
       if (window.innerWidth < 768) {
         document.getElementById('nav').style.display = 'none';
       }
