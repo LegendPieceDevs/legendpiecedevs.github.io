@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legend Piece</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    header {
+      background-color: #222;
+      color: white;
+      padding: 10px 20px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .menu-toggle {
+      font-size: 1.5em;
+      cursor: pointer;
+      display: none;
+    }
+
+    nav {
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      display: none;
+      flex-direction: column;
+    }
+
+    nav a {
+      color: white;
+      padding: 15px 20px;
+      text-decoration: none;
+      border-bottom: 1px solid #444;
+    }
+
+    nav a:hover {
+      background-color: #444;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    /* 데스크탑 스타일 */
+    @media (min-width: 768px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      nav {
+        position: static;
+        display: flex !important;
+        flex-direction: row;
+        background-color: transparent;
+      }
+
+      nav a {
+        border: none;
+        color: white;
+      }
+
+      header {
+        justify-content: space-between;
+      }
+
+      nav a:hover {
+        background-color: #555;
+      }
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Legend Piece</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="nav">
+      <a href="#" onclick="showSection('main')">메인</a>
+      <a href="#" onclick="showSection('dev')">개발자</a>
+      <a href="#" onclick="showSection('support')">후원</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="main" class="section active">
+      <h1>🎮 Legend Piece에 오신 것을 환영합니다!</h1>
+      <p>이곳은 저희가 만드는 게임의 메인 페이지입니다.</p>
+    </div>
+
+    <div id="dev" class="section">
+      <h1>👨‍💻 개발자 소개</h1>
+      <p>저희는 두 명이서 Legend Piece를 개발하고 있어요!</p>
+      <ul>
+        <li> sno_w2026 - 기획/아트</li>
+        <li> WALK - 개발/프로그래밍</li>
+      </ul>
+    </div>
+
+    <div id="support" class="section">
+      <h1>💖 후원 안내</h1>
+      <p>게임을 응원하고 싶다면 후원을 통해 도움을 줄 수 있어요!</p>
+      <p>곧 후원 링크도 추가될 예정입니다 😊</p>
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('nav');
+      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => section.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+
+      // 모바일에서는 메뉴 닫기
+      if (window.innerWidth < 768) {
+        document.getElementById('nav').style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
