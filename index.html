@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Legend Piece</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
   <style>
     body {
       margin: 0;
@@ -37,14 +38,13 @@
       left: 0;
       width: 100%;
       background-color: #333;
+      display: none;
       flex-direction: column;
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.4s ease-in-out;
+      transition: all 0.3s ease-in-out;
     }
 
-    nav.active {
-      max-height: 400px; /* 4개 메뉴에 충분한 높이 */
+    nav.show {
+      display: flex;
     }
 
     nav a {
@@ -54,6 +54,7 @@
       text-decoration: none;
       border-bottom: 1px solid #444;
       text-align: center;
+      transition: background-color 0.3s;
     }
 
     nav a:hover {
@@ -73,10 +74,13 @@
       max-width: 800px;
       width: 100%;
       text-align: center;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
     }
 
     .section.active {
       display: block;
+      opacity: 1;
     }
 
     .section h1 {
@@ -140,8 +144,6 @@
         display: flex !important;
         flex-direction: row;
         background-color: transparent;
-        max-height: none !important;
-        overflow: visible !important;
       }
 
       .menu-toggle {
@@ -223,23 +225,29 @@
 
     <div id="support" class="section">
       <h1>Donate</h1>
-      <p>후원은 게임 개발에 굉장한 도움이 됩니다.</p>
+      <p>후원은 게임 개발에 매우 큰 도움이 됩니다.</p>
     </div>
   </main>
 
   <script>
     function toggleMenu() {
       const nav = document.getElementById('nav');
-      nav.classList.toggle('active');
+      nav.classList.toggle('show');
     }
 
     function showSection(id) {
       const sections = document.querySelectorAll('.section');
-      sections.forEach(section => section.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+      sections.forEach(section => {
+        section.classList.remove('active');
+        section.style.opacity = 0;
+      });
+
+      const target = document.getElementById(id);
+      target.classList.add('active');
+      setTimeout(() => target.style.opacity = 1, 50);
 
       if (window.innerWidth < 768) {
-        document.getElementById('nav').classList.remove('active');
+        document.getElementById('nav').classList.remove('show');
       }
     }
   </script>
