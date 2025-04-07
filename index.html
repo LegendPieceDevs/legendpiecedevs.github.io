@@ -90,9 +90,18 @@
 </head>
 <body>
   <header>
-    <div class="logo">
-  <img src="logo.png" alt="Legend Piece 로고" style="height: 50px;" />
-</div>
+    <header style="padding: 20px 30px; height: 100px;">
+  <div class="logo">
+    <img src="logo.png" alt="Legend Piece 로고" style="height: 80px;" />
+  </div>
+  <div class="menu-toggle" onclick="toggleMenu()" style="font-size: 32px;">☰</div>
+  <nav id="nav">
+    <a href="#" onclick="showSection('main')">Main</a>
+    <a href="#" onclick="showSection('dev')">Developer</a>
+    <a href="#" onclick="showSection('support')">Donate</a>
+  </nav>
+</header>
+
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <nav id="nav">
       <a href="#" onclick="showSection('main')">Main</a>
