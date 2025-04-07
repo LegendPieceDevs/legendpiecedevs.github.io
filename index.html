@@ -83,11 +83,12 @@
       margin-bottom: 30px;
     }
 
-    .section img {
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      margin-top: 20px;
+    .main-logo {
+      max-width: 400px;
+      width: 100%;
+      margin-bottom: 5px; /* 텍스트와 간격 줄이기 */
+      border-radius: 0;
+      box-shadow: none; /* 그림자 제거 */
     }
 
     .section ul {
@@ -167,16 +168,10 @@
 
   <main>
     <div id="main" class="section active">
-  <img src="logo2.png" alt="Legend Piece 로고" style="
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px; /* 글씨와의 간격 줄이기 */
-    border-radius: 0;
-    box-shadow: none; /* 그림자 제거 */
-  "/>
-  <h1>Welcome To Legend Piece!</h1>
-  <p>이곳은 게임의 메인 소개 페이지입니다.</p>
-</div>
+      <img src="logo2.png" alt="Legend Piece 메인 로고" class="main-logo" />
+      <h1>Welcome To Legend Piece!</h1>
+      <p>이곳은 게임의 메인 소개 페이지입니다.</p>
+    </div>
 
     <div id="dev" class="section">
       <h1>Developer Introduce</h1>
