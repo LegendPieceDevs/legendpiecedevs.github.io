@@ -14,20 +14,19 @@
     header {
       background-color: #222;
       color: white;
-      padding: 10px 20px;
-      position: relative;
+      padding: 16px 24px;
+      height: 85px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .logo {
-      font-size: 1.5em;
-      font-weight: bold;
+    .logo img {
+      height: 65px; /* ← 살짝 줄인 로고 크기 */
     }
 
     .menu-toggle {
-      font-size: 1.5em;
+      font-size: 28px;
       cursor: pointer;
       display: block;
     }
@@ -44,9 +43,10 @@
 
     nav a {
       color: white;
-      padding: 15px 20px;
+      padding: 12px 20px;
       text-decoration: none;
       border-bottom: 1px solid #444;
+      font-size: 16px;
     }
 
     nav a:hover {
@@ -90,28 +90,23 @@
 </head>
 <body>
   <header>
-    <header style="padding: 16px 24px; height: 85px;">
-  <div class="logo">
-    <img src="logo.png" alt="Legend Piece 로고" style="height: 65px;" />
-  </div>
-  <div class="menu-toggle" onclick="toggleMenu()" style="font-size: 28px;">☰</div>
-  <nav id="nav">
-    <a href="#" onclick="showSection('main')">Main</a>
-    <a href="#" onclick="showSection('dev')">Developer</a>
-    <a href="#" onclick="showSection('support')">Donate</a>
-  </nav>
-</header>
-
+    <div class="logo">
+      <img src="logo.png" alt="Legend Piece 로고" />
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="nav">
+      <a href="#" onclick="showSection('main')">Main</a>
+      <a href="#" onclick="showSection('dev')">Developer</a>
+      <a href="#" onclick="showSection('support')">Donate</a>
+    </nav>
+  </header>
 
   <main>
     <div id="main" class="section active">
-  <h1>🎮 Legend Piece에 오신 걸 환영합니다!</h1>
-  <p>이곳은 게임의 메인 소개 페이지입니다.</p>
-
-  <!-- 이미지 추가 -->
-  <img src="LP1.png" alt="Legend Piece 스크린샷" style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-top: 20px;" />
-</div>
-
+      <h1>🎮 Legend Piece에 오신 걸 환영합니다!</h1>
+      <p>이곳은 게임의 메인 소개 페이지입니다.</p>
+      <img src="LP1.png" alt="Legend Piece 스크린샷" style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-top: 20px;" />
+    </div>
 
     <div id="dev" class="section">
       <h1>👨‍💻 개발자 소개</h1>
@@ -139,7 +134,6 @@
       sections.forEach(section => section.classList.remove('active'));
       document.getElementById(id).classList.add('active');
 
-      // 메뉴 닫기 (모바일)
       if (window.innerWidth < 768) {
         document.getElementById('nav').style.display = 'none';
       }
