@@ -29,7 +29,7 @@
     .menu-toggle {
       font-size: 1.5em;
       cursor: pointer;
-      display: none;
+      display: block;
     }
 
     nav {
@@ -57,12 +57,7 @@
       padding: 20px;
     }
 
-    /* 데스크탑 스타일 */
     @media (min-width: 768px) {
-      .menu-toggle {
-        display: none;
-      }
-
       nav {
         position: static;
         display: flex !important;
@@ -70,13 +65,13 @@
         background-color: transparent;
       }
 
+      .menu-toggle {
+        display: none;
+      }
+
       nav a {
         border: none;
         color: white;
-      }
-
-      header {
-        justify-content: space-between;
       }
 
       nav a:hover {
@@ -106,23 +101,22 @@
 
   <main>
     <div id="main" class="section active">
-      <h1>🎮 Legend Piece에 오신 것을 환영합니다!</h1>
-      <p>이곳은 저희가 만드는 게임의 메인 페이지입니다.</p>
+      <h1>🎮 Legend Piece에 오신 걸 환영합니다!</h1>
+      <p>이곳은 게임의 메인 소개 페이지입니다.</p>
     </div>
 
     <div id="dev" class="section">
       <h1>👨‍💻 개발자 소개</h1>
       <p>저희는 두 명이서 Legend Piece를 개발하고 있어요!</p>
       <ul>
-        <li> sno_w2026 - 기획/아트/개발/프로그래밍</li>
-        <li> WALK - 꼽사리 끼기</li>
+        <li>🍠 대추 - 기획/디자인</li>
+        <li>🐢 노알라 - 프로그래밍</li>
       </ul>
     </div>
 
     <div id="support" class="section">
-      <h1>💖 후원 안내</h1>
-      <p>게임을 응원하고 싶다면 후원을 통해 도움을 줄 수 있어요!</p>
-      <p>곧 후원 링크도 추가될 예정입니다 😊</p>
+      <h1>💖 후원</h1>
+      <p>후원을 통해 게임을 응원할 수 있어요. 감사합니다!</p>
     </div>
   </main>
 
@@ -137,7 +131,7 @@
       sections.forEach(section => section.classList.remove('active'));
       document.getElementById(id).classList.add('active');
 
-      // 모바일에서는 메뉴 닫기
+      // 메뉴 닫기 (모바일)
       if (window.innerWidth < 768) {
         document.getElementById('nav').style.display = 'none';
       }
