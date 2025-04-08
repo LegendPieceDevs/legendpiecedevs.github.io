@@ -10,11 +10,11 @@
       --header-height: 70px;
       --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       --text-color: #222;
-      --header-bg: #b5d6f5; /* 살짝 더 진한 하늘색 */
+      --header-bg: #aac8e8;
       --nav-hover-bg: rgba(255, 255, 255, 0.6);
-      --active-color: #2c4a87; /* 파란색보다 진한 선택 강조 색 */
-      --welcome-color: #1f3a70; /* 남색 */
-      --subtext-color: rgba(0, 0, 0, 0.4); /* In Dev... */
+      --active-color: #2c4a87;
+      --welcome-color: #1f3a70;
+      --subtext-color: rgba(0, 0, 0, 0.3);
     }
 
     * {
@@ -36,13 +36,13 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 2rem;
-      box-shadow: 0 4px 8px rgba(0, 48, 112, 0.3); /* 남색 그림자 */
+      box-shadow: 0 4px 8px rgba(0, 48, 112, 0.2); /* 연한 남색 그림자 */
       position: relative;
       z-index: 10;
     }
 
     .logo img {
-      height: 60px;
+      height: 65px;
       object-fit: contain;
       transform: translateY(5%);
     }
@@ -59,7 +59,7 @@
       padding: 0.4rem 0.8rem;
       border-radius: 6px;
       position: relative;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
     }
 
     nav a:hover {
@@ -83,10 +83,13 @@
       display: none;
       max-width: 800px;
       width: 100%;
+      opacity: 0;
+      transition: opacity 0.6s ease;
     }
 
     .section.active {
       display: block;
+      opacity: 1;
     }
 
     .main-logo {
@@ -155,11 +158,13 @@
       main {
         padding: 3rem;
       }
+
       .progress-gallery {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
       }
+
       .progress-item {
         width: 48%;
       }
@@ -227,12 +232,28 @@
   <script>
     function showSection(id, el) {
       const sections = document.querySelectorAll('.section');
-      sections.forEach(section => section.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-
       const navLinks = document.querySelectorAll('nav a');
-      navLinks.forEach(link => link.classList.remove('active'));
+
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+      });
+
       el.classList.add('active');
+
+      const target = document.getElementById(id);
+      setTimeout(() => {
+        sections.forEach(section => {
+          if (section !== target) section.style.display = 'none';
+        });
+        target.style.display = 'block';
+        setTimeout(() => {
+          target.classList.add('active');
+        }, 10);
+      }, 200);
     }
   </script>
 </body>
