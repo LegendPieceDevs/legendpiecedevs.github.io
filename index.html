@@ -9,7 +9,7 @@
     :root {
       --header-height: 70px;
       --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --primary-color: rgba(255, 255, 255, 0.9);
+      --header-bg: #b3d4fc; /* 메뉴 탭 색상 */
       --text-color: #222;
       --gradient-start: #ffffff;
       --gradient-end: #d0e7ff;
@@ -35,7 +35,7 @@
 
     header {
       height: var(--header-height);
-      background-color: var(--primary-color);
+      background-color: var(--header-bg);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -100,6 +100,7 @@
       text-align: center;
       opacity: 0;
       transition: opacity 0.4s ease-in-out;
+      margin-bottom: 3rem;
     }
 
     .section.active {
@@ -107,28 +108,30 @@
       opacity: 1;
     }
 
-    /* 메인 섹션: 배경과 자연스럽게 연결 */
+    /* 메인 섹션은 배경 없이 자연스럽게 */
     #main {
       background: none;
       padding: 3rem 1rem;
     }
 
-    /* 다른 섹션들은 박스 형태 유지 */
+    /* 다른 섹션들은 박스 형태로 구분되게 */
     #dev, #progress, #support {
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.75);
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
     }
 
     .section h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
+      font-size: 2.2rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5rem;
     }
 
     .section p {
-      font-size: 1rem;
-      margin-bottom: 2rem;
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
     }
 
     .main-logo {
