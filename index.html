@@ -8,13 +8,14 @@
   <style>
     :root {
       --header-height: 70px;
-      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --gradient-start: #ffffff;
-      --gradient-end: #b3e5ff; /* 살짝 진한 하늘색 */
-      --nav-bg: #cceeff; /* 연한 하늘색 */
+      --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --primary-color: #f4faff;
       --text-color: #222;
-      --active-link-color: #007acc;
-      --nav-shadow: rgba(0, 51, 102, 0.2); /* 남색 그림자 */
+      --navy-color: #1e3a5f;
+      --navy-shadow: rgba(30, 58, 95, 0.3);
+      --link-highlight: #154278;
+      --highlight-soft: #3a6fa0;
+      --in-dev-color: rgba(0, 0, 0, 0.3);
     }
 
     * {
@@ -23,16 +24,9 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
-    }
-
     body {
-      font-family: var(--font-main);
-      background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-      background-size: cover;
+      font-family: var(--main-font);
+      background: linear-gradient(to bottom, #ffffff, #cde6ff);
       color: var(--text-color);
       font-size: 1rem;
       line-height: 1.6;
@@ -40,23 +34,25 @@
 
     header {
       height: var(--header-height);
-      background-color: var(--nav-bg);
+      background-color: #e4f1fb;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 1.5rem;
-      box-shadow: 0 4px 6px var(--nav-shadow);
-      position: relative;
-      z-index: 10;
+      box-shadow: 0 4px 10px var(--navy-shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .logo img {
       height: 50px;
+      filter: hue-rotate(200deg) saturate(150%);
     }
 
     .menu-toggle {
       font-size: 2rem;
-      color: #333;
+      color: var(--navy-color);
       cursor: pointer;
       display: block;
     }
@@ -66,7 +62,7 @@
       top: var(--header-height);
       left: 0;
       width: 100%;
-      background-color: var(--nav-bg);
+      background-color: rgba(255, 255, 255, 0.95);
       display: none;
       flex-direction: column;
     }
@@ -76,19 +72,22 @@
     }
 
     nav a {
-      color: #000;
+      color: var(--navy-color);
       text-decoration: none;
       font-size: 1rem;
       padding: 1rem;
       text-align: center;
-      transition: background-color 0.3s;
+      border-bottom: 1px solid #ddd;
+      transition: background-color 0.3s, color 0.3s;
     }
 
-    nav a:hover,
+    nav a:hover {
+      background-color: #f0f0f0;
+    }
+
     nav a.active {
-      background-color: #a9ddff;
+      color: var(--link-highlight);
       font-weight: bold;
-      color: var(--active-link-color);
     }
 
     main {
@@ -101,12 +100,10 @@
     .section {
       display: none;
       width: 100%;
-      max-width: 1000px;
+      max-width: 900px;
       text-align: center;
       opacity: 0;
-      transition: opacity 0.4s ease-in-out;
-      padding: 2rem 1rem;
-      background: transparent;
+      transition: opacity 0.5s ease-in-out;
     }
 
     .section.active {
@@ -114,20 +111,31 @@
       opacity: 1;
     }
 
-    .main-logo {
-      max-width: 300px;
-      width: 100%;
-      margin-bottom: 1rem;
-    }
-
     .section h1 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-bottom: 1rem;
     }
 
     .section p {
       font-size: 1rem;
       margin-bottom: 2rem;
+    }
+
+    .main-logo {
+      max-width: 400px;
+      width: 100%;
+      margin-bottom: 1rem;
+      background: none;
+      box-shadow: none;
+    }
+
+    #main h1 {
+      color: var(--navy-color);
+    }
+
+    #main p {
+      color: var(--in-dev-color);
+      font-size: 1.2rem;
     }
 
     ul {
@@ -140,6 +148,11 @@
       margin-bottom: 0.75rem;
     }
 
+    ul li a {
+      color: #1d3b6d;
+      font-weight: 500;
+    }
+
     .progress-gallery {
       display: flex;
       flex-direction: column;
@@ -147,14 +160,18 @@
       margin-top: 2rem;
     }
 
+    .progress-item {
+      text-align: center;
+    }
+
     .progress-item img {
       width: 100%;
-      border-radius: 8px;
+      border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .progress-item p {
-      margin-top: 0.75rem;
+      margin-top: 0.5rem;
       font-size: 1rem;
     }
 
@@ -168,17 +185,17 @@
         display: flex !important;
         flex-direction: row;
         background-color: transparent;
+        box-shadow: none;
       }
 
       nav a {
         padding: 0 1.2rem;
+        font-size: 1rem;
         border: none;
       }
 
-      nav a:hover,
-      nav a.active {
+      nav a:hover {
         background-color: rgba(0, 0, 0, 0.05);
-        border-radius: 5px;
       }
     }
   </style>
@@ -190,10 +207,10 @@
     </div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <nav id="nav">
-      <a href="#" id="nav-main" onclick="showSection('main')">메인</a>
-      <a href="#" id="nav-dev" onclick="showSection('dev')">개발자</a>
-      <a href="#" id="nav-progress" onclick="showSection('progress')">개발 진행 상황</a>
-      <a href="#" id="nav-support" onclick="showSection('support')">후원</a>
+      <a href="#" onclick="showSection('main', this)" class="active">메인</a>
+      <a href="#" onclick="showSection('dev', this)">개발자</a>
+      <a href="#" onclick="showSection('progress', this)">개발 진행 상황</a>
+      <a href="#" onclick="showSection('support', this)">후원</a>
     </nav>
   </header>
 
@@ -247,10 +264,8 @@
       document.getElementById('nav').classList.toggle('show');
     }
 
-    function showSection(id) {
+    function showSection(id, element) {
       const sections = document.querySelectorAll('.section');
-      const navLinks = document.querySelectorAll('nav a');
-
       sections.forEach(section => {
         section.classList.remove('active');
         section.style.opacity = 0;
@@ -260,8 +275,10 @@
       target.classList.add('active');
       setTimeout(() => target.style.opacity = 1, 50);
 
-      navLinks.forEach(link => link.classList.remove('active'));
-      document.getElementById('nav-' + id).classList.add('active');
+      // 메뉴 강조 효과
+      const links = document.querySelectorAll('nav a');
+      links.forEach(link => link.classList.remove('active'));
+      if (element) element.classList.add('active');
 
       if (window.innerWidth < 768) {
         document.getElementById('nav').classList.remove('show');
