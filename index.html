@@ -1,3 +1,21 @@
+물론이야! 요청하신 사항들을 반영하여 **"In Dev..."** 텍스트를 약간 더 얕게 표시하고, 섹션 전환 시 부드러운 애니메이션 효과를 추가한 전체 코드를 제공할게.
+
+---
+
+### ✅ **주요 변경사항 요약:**
+
+1. **"In Dev..." 텍스트 스타일 변경:**
+   - 기존보다 더 연한 회색(`rgba(0, 0, 0, 0.3)`)으로 설정하여 배경과의 대비를 줄여 눈에 덜 띄게 조정.
+
+2. **섹션 전환 시 페이드 인/아웃 애니메이션 추가:**
+   - CSS의 `opacity`와 `visibility` 속성을 활용하여 섹션이 전환될 때 부드럽게 나타나고 사라지도록 구현.
+   - `transition` 속성을 사용하여 애니메이션 지속 시간을 0.5초로 설정.
+
+---
+
+### ✅ **전체 HTML 코드:**
+
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,11 +28,11 @@
       --header-height: 70px;
       --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       --text-color: #222;
-      --header-bg: #b5d6f5; /* 살짝 더 진한 하늘색 */
+      --header-bg: #b5d6f5;
       --nav-hover-bg: rgba(255, 255, 255, 0.6);
-      --active-color: #2c4a87; /* 파란색보다 진한 선택 강조 색 */
-      --welcome-color: #1f3a70; /* 남색 */
-      --subtext-color: rgba(0, 0, 0, 0.4); /* In Dev... */
+      --active-color: #2c4a87;
+      --welcome-color: #1f3a70;
+      --subtext-color: rgba(0, 0, 0, 0.3); /* "In Dev..." 텍스트 색상 조정 */
     }
 
     * {
@@ -36,7 +54,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 2rem;
-      box-shadow: 0 4px 8px rgba(0, 48, 112, 0.3); /* 남색 그림자 */
+      box-shadow: 0 4px 8px rgba(0, 48, 112, 0.3);
       position: relative;
       z-index: 10;
     }
@@ -80,13 +98,18 @@
     }
 
     .section {
-      display: none;
       max-width: 800px;
       width: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+      position: absolute;
     }
 
     .section.active {
-      display: block;
+      opacity: 1;
+      visibility: visible;
+      position: relative;
     }
 
     .main-logo {
@@ -190,50 +213,4 @@
       <h1>Developer Introduce</h1>
       <p>Legend Piece의 개발자들</p>
       <ul style="margin-top: 2rem;">
-        <li>❄️ <a href="https://www.roblox.com/users/2542821031/profile" target="_blank">sno_w2026</a> - 기획 / 프로그래밍 / 디자인</li>
-        <li>🚶‍♂️ <a href="https://www.roblox.com/users/2058595138/profile" target="_blank">WALK</a> - 디자인 / 홈페이지 제작</li>
-      </ul>
-    </div>
-
-    <div id="progress" class="section">
-      <h1>Progress</h1>
-      <p>현재까지의 개발 진행 상황입니다!</p>
-      <div class="progress-gallery">
-        <div class="progress-item">
-          <img src="LP1.png" alt="기본섬" />
-          <p>🔹 기본섬</p>
-        </div>
-        <div class="progress-item">
-          <img src="LP2.png" alt="동굴" />
-          <p>🔹 동굴</p>
-        </div>
-        <div class="progress-item">
-          <img src="LP3.png" alt="사막섬" />
-          <p>🔹 사막섬</p>
-        </div>
-        <div class="progress-item">
-          <img src="LP4.png" alt="이펙트" />
-          <p>🔹 간단한 이펙트</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="support" class="section">
-      <h1>Donate</h1>
-      <p>후원은 게임 개발에 큰 도움이 됩니다. 감사합니다!</p>
-    </div>
-  </main>
-
-  <script>
-    function showSection(id, el) {
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(section => section.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-
-      const navLinks = document.querySelectorAll('nav a');
-      navLinks.forEach(link => link.classList.remove('active'));
-      el.classList.add('active');
-    }
-  </script>
-</body>
-</html>
+        <li>❄️ <a href="https://www.roblox.com/users/ 
