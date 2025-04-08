@@ -9,13 +9,15 @@
     :root {
       --header-height: 70px;
       --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --primary-color: #f4faff;
       --text-color: #222;
       --navy-color: #1e3a5f;
-      --navy-shadow: rgba(30, 58, 95, 0.3);
-      --link-highlight: #154278;
-      --highlight-soft: #3a6fa0;
+      --highlight-color: #154278;
+      --developer-name-color: #123056;
+      --welcome-color: #1a2e55;
       --in-dev-color: rgba(0, 0, 0, 0.3);
+      --background-start: #f6fbff;
+      --background-middle: #d6ebff;
+      --background-end: #c0e0ff;
     }
 
     * {
@@ -26,7 +28,7 @@
 
     body {
       font-family: var(--main-font);
-      background: linear-gradient(to bottom, #ffffff, #cde6ff);
+      background: linear-gradient(to bottom, var(--background-start), var(--background-middle), var(--background-end));
       color: var(--text-color);
       font-size: 1rem;
       line-height: 1.6;
@@ -34,12 +36,12 @@
 
     header {
       height: var(--header-height);
-      background-color: #e4f1fb;
+      background-color: #d7ecfa;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 1.5rem;
-      box-shadow: 0 4px 10px var(--navy-shadow);
+      box-shadow: 0 4px 10px rgba(30, 58, 95, 0.3);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -47,7 +49,7 @@
 
     .logo img {
       height: 50px;
-      filter: hue-rotate(200deg) saturate(150%);
+      filter: hue-rotate(200deg) saturate(160%);
     }
 
     .menu-toggle {
@@ -86,7 +88,7 @@
     }
 
     nav a.active {
-      color: var(--link-highlight);
+      color: var(--highlight-color);
       font-weight: bold;
     }
 
@@ -130,7 +132,7 @@
     }
 
     #main h1 {
-      color: var(--navy-color);
+      color: var(--welcome-color);
     }
 
     #main p {
@@ -149,7 +151,7 @@
     }
 
     ul li a {
-      color: #1d3b6d;
+      color: var(--developer-name-color);
       font-weight: 500;
     }
 
@@ -275,7 +277,6 @@
       target.classList.add('active');
       setTimeout(() => target.style.opacity = 1, 50);
 
-      // 메뉴 강조 효과
       const links = document.querySelectorAll('nav a');
       links.forEach(link => link.classList.remove('active'));
       if (element) element.classList.add('active');
