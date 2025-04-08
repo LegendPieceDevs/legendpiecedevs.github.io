@@ -10,11 +10,10 @@
       --header-height: 70px;
       --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       --gradient-start: #ffffff;
-      --gradient-end: #cdeaff;
-      --gradient-progress: #e1f4ff;
-      --nav-bg: #c3e6ff; /* 연하게 수정된 헤더 색상 */
+      --gradient-end: #b3e5ff; /* 살짝 더 진한 하늘색 */
+      --nav-bg: #cceeff; /* 헤더 배경 – 약간 연한 하늘색 */
       --text-color: #222;
-      --active-link-color: #005d99;
+      --active-link-color: #007acc;
     }
 
     * {
@@ -23,9 +22,16 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      height: 100%;
+    }
+
     body {
       font-family: var(--font-main);
       background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: cover;
       color: var(--text-color);
       font-size: 1rem;
       line-height: 1.6;
@@ -151,10 +157,6 @@
       font-size: 1rem;
     }
 
-    #progress {
-      background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-progress));
-    }
-
     @media (min-width: 768px) {
       .menu-toggle {
         display: none;
@@ -247,7 +249,7 @@
     function showSection(id) {
       const sections = document.querySelectorAll('.section');
       const navLinks = document.querySelectorAll('nav a');
-      
+
       sections.forEach(section => {
         section.classList.remove('active');
         section.style.opacity = 0;
