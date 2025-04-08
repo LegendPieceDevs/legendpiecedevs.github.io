@@ -10,10 +10,11 @@
       --header-height: 70px;
       --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       --gradient-start: #ffffff;
-      --gradient-end: #b3e5ff; /* 살짝 더 진한 하늘색 */
-      --nav-bg: #cceeff; /* 헤더 배경 – 약간 연한 하늘색 */
+      --gradient-end: #b3e5ff; /* 살짝 진한 하늘색 */
+      --nav-bg: #cceeff; /* 연한 하늘색 */
       --text-color: #222;
       --active-link-color: #007acc;
+      --nav-shadow: rgba(0, 51, 102, 0.2); /* 남색 그림자 */
     }
 
     * {
@@ -44,7 +45,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 1.5rem;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 6px var(--nav-shadow);
       position: relative;
       z-index: 10;
     }
