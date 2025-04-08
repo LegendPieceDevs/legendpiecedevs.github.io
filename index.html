@@ -9,12 +9,13 @@
     :root {
       --header-height: 70px;
       --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --navy: #1e3a8a;
-      --deep-blue: #1c3d91;
-      --gradient-start: #f8fbff;
-      --gradient-end: #cce3ff;
-      --highlight: #184a99;
-      --header-bg: #e6f0ff;
+      --background-color: #d6eaff; /* 하늘색 */
+      --header-color: #b0d4f1;     /* 약간 진한 하늘색 */
+      --shadow-color: #2a4a8a;     /* 남색 그림자 */
+      --nav-active-color: #1d4e89; /* 선택된 메뉴 테두리 색상 */
+      --deep-blue: #0f2e6d;
+      --soft-gray: #888;
+      --dev-name-color: #183c78;
     }
 
     * {
@@ -25,53 +26,44 @@
 
     body {
       font-family: var(--main-font);
-      background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+      background-color: var(--background-color);
       color: #222;
-      font-size: 1rem;
-      line-height: 1.6;
     }
 
     header {
       height: var(--header-height);
-      background-color: var(--header-bg);
+      background-color: var(--header-color);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 1.5rem;
-      box-shadow: 0 4px 8px rgba(30, 58, 138, 0.3);
+      box-shadow: 0 4px 10px var(--shadow-color);
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 100;
     }
 
-    .logo-text {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: var(--navy);
-      border: 2px solid var(--navy);
-      padding: 5px 10px;
-      border-radius: 6px;
-      background: linear-gradient(to bottom, #ffffff, #e6f0ff);
+    .logo img {
+      height: 50px;
     }
 
     nav {
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
     nav a {
-      color: #333;
       text-decoration: none;
-      font-size: 1rem;
+      color: #222;
+      font-weight: 500;
       padding: 0.5rem 1rem;
-      border-radius: 4px;
-      transition: 0.3s;
+      border-radius: 8px;
+      transition: all 0.3s;
     }
 
-    nav a:hover,
     nav a.active {
-      background-color: var(--highlight);
-      color: #fff;
+      border: 2px solid var(--nav-active-color);
+      background-color: rgba(255, 255, 255, 0.2);
     }
 
     main {
@@ -82,52 +74,49 @@
     }
 
     .section {
-      display: none;
       max-width: 800px;
       width: 100%;
       text-align: center;
+      display: none;
     }
 
     .section.active {
       display: block;
     }
 
-    .section h1 {
-      font-size: 2rem;
+    .main-logo {
+      max-width: 400px;
+      width: 100%;
       margin-bottom: 1rem;
-      color: var(--navy);
     }
 
-    .section p {
-      font-size: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .main-title {
+    .section h1 {
       font-size: 2.5rem;
-      font-weight: bold;
-      color: var(--navy);
+      margin-bottom: 1rem;
     }
 
-    .main-subtitle {
+    .welcome-title {
+      color: var(--deep-blue);
+    }
+
+    .in-dev {
       font-size: 1.2rem;
-      color: #666;
-      opacity: 0.6;
+      color: var(--soft-gray);
     }
 
     ul {
       list-style: none;
       padding: 0;
-    }
-
-    ul li {
-      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      text-align: left;
+      max-width: 400px;
+      margin: 0 auto;
     }
 
     ul li a {
-      color: #102a78;
-      font-weight: bold;
+      color: var(--dev-name-color);
       text-decoration: none;
+      font-weight: bold;
     }
 
     .progress-gallery {
@@ -139,37 +128,39 @@
 
     .progress-item img {
       width: 100%;
-      border-radius: 10px;
+      border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .progress-item p {
-      margin-top: 0.5rem;
-      font-weight: 500;
+      margin-top: 0.75rem;
+      font-size: 1rem;
     }
 
-    @media (max-width: 768px) {
+    @media (min-width: 768px) {
       nav {
-        flex-direction: column;
+        justify-content: flex-end;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo-text">LEGEND PIECE</div>
+    <div class="logo">
+      <img src="logo.png" alt="Legend Piece 로고" />
+    </div>
     <nav>
       <a href="#" onclick="showSection('main', this)" class="active">메인</a>
       <a href="#" onclick="showSection('dev', this)">개발자</a>
-      <a href="#" onclick="showSection('progress', this)">개발 진행상황</a>
+      <a href="#" onclick="showSection('progress', this)">개발 진행 상황</a>
       <a href="#" onclick="showSection('support', this)">후원</a>
     </nav>
   </header>
 
   <main>
     <div id="main" class="section active">
-      <h1 class="main-title">Welcome To Legend Piece!</h1>
-      <p class="main-subtitle">In Dev...</p>
+      <h1 class="welcome-title">Welcome To Legend Piece!</h1>
+      <p class="in-dev">In Dev...</p>
     </div>
 
     <div id="dev" class="section">
@@ -211,14 +202,16 @@
   </main>
 
   <script>
-    function showSection(id, link) {
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(s => s.classList.remove('active'));
+    function showSection(id, el) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
       document.getElementById(id).classList.add('active');
 
-      const links = document.querySelectorAll('nav a');
-      links.forEach(a => a.classList.remove('active'));
-      link.classList.add('active');
+      document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+      });
+      el.classList.add('active');
     }
   </script>
 </body>
