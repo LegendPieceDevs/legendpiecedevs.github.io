@@ -8,11 +8,13 @@
   <style>
     :root {
       --header-height: 70px;
-      --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --header-bg: #b3d4fc; /* 메뉴 탭 색상 */
-      --text-color: #222;
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       --gradient-start: #ffffff;
-      --gradient-end: #d0e7ff;
+      --gradient-end: #cdeaff;
+      --gradient-progress: #e1f4ff;
+      --nav-bg: #c3e6ff; /* 연하게 수정된 헤더 색상 */
+      --text-color: #222;
+      --active-link-color: #005d99;
     }
 
     * {
@@ -21,12 +23,8 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
-    }
-
     body {
-      font-family: var(--main-font);
+      font-family: var(--font-main);
       background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
       color: var(--text-color);
       font-size: 1rem;
@@ -35,12 +33,12 @@
 
     header {
       height: var(--header-height);
-      background-color: var(--header-bg);
+      background-color: var(--nav-bg);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 1.5rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       position: relative;
       z-index: 10;
     }
@@ -61,10 +59,9 @@
       top: var(--header-height);
       left: 0;
       width: 100%;
-      background-color: rgba(255, 255, 255, 0.95);
+      background-color: var(--nav-bg);
       display: none;
       flex-direction: column;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
 
     nav.show {
@@ -72,17 +69,19 @@
     }
 
     nav a {
-      color: #222;
+      color: #000;
       text-decoration: none;
       font-size: 1rem;
       padding: 1rem;
       text-align: center;
-      border-bottom: 1px solid #ddd;
       transition: background-color 0.3s;
     }
 
-    nav a:hover {
-      background-color: #f0f0f0;
+    nav a:hover,
+    nav a.active {
+      background-color: #a9ddff;
+      font-weight: bold;
+      color: var(--active-link-color);
     }
 
     main {
@@ -90,17 +89,17 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: calc(100vh - var(--header-height));
     }
 
     .section {
       display: none;
       width: 100%;
-      max-width: 900px;
+      max-width: 1000px;
       text-align: center;
       opacity: 0;
       transition: opacity 0.4s ease-in-out;
-      margin-bottom: 3rem;
+      padding: 2rem 1rem;
+      background: transparent;
     }
 
     .section.active {
@@ -108,36 +107,20 @@
       opacity: 1;
     }
 
-    /* 메인 섹션은 배경 없이 자연스럽게 */
-    #main {
-      background: none;
-      padding: 3rem 1rem;
-    }
-
-    /* 다른 섹션들은 박스 형태로 구분되게 */
-    #dev, #progress, #support {
-      background: rgba(255, 255, 255, 0.75);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    .main-logo {
+      max-width: 300px;
+      width: 100%;
+      margin-bottom: 1rem;
     }
 
     .section h1 {
-      font-size: 2.2rem;
-      margin-bottom: 1.2rem;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 0.5rem;
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
 
     .section p {
-      font-size: 1.05rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .main-logo {
-      max-width: 400px;
-      width: 100%;
-      margin-bottom: 1rem;
+      font-size: 1rem;
+      margin-bottom: 2rem;
     }
 
     ul {
@@ -157,10 +140,6 @@
       margin-top: 2rem;
     }
 
-    .progress-item {
-      text-align: center;
-    }
-
     .progress-item img {
       width: 100%;
       border-radius: 8px;
@@ -170,6 +149,10 @@
     .progress-item p {
       margin-top: 0.75rem;
       font-size: 1rem;
+    }
+
+    #progress {
+      background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-progress));
     }
 
     @media (min-width: 768px) {
@@ -182,17 +165,17 @@
         display: flex !important;
         flex-direction: row;
         background-color: transparent;
-        box-shadow: none;
       }
 
       nav a {
-        padding: 0 1rem;
-        font-size: 1rem;
+        padding: 0 1.2rem;
         border: none;
       }
 
-      nav a:hover {
+      nav a:hover,
+      nav a.active {
         background-color: rgba(0, 0, 0, 0.05);
+        border-radius: 5px;
       }
     }
   </style>
@@ -204,10 +187,10 @@
     </div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <nav id="nav">
-      <a href="#" onclick="showSection('main')">메인</a>
-      <a href="#" onclick="showSection('dev')">개발자</a>
-      <a href="#" onclick="showSection('progress')">개발 진행 상황</a>
-      <a href="#" onclick="showSection('support')">후원</a>
+      <a href="#" id="nav-main" onclick="showSection('main')">메인</a>
+      <a href="#" id="nav-dev" onclick="showSection('dev')">개발자</a>
+      <a href="#" id="nav-progress" onclick="showSection('progress')">개발 진행 상황</a>
+      <a href="#" id="nav-support" onclick="showSection('support')">후원</a>
     </nav>
   </header>
 
@@ -222,8 +205,8 @@
       <h1>Developer Introduce</h1>
       <p>Legend Piece의 개발자들</p>
       <ul>
-        <li>❄️ <a href="https://www.roblox.com/users/2542821031/profile" target="_blank" style="color: inherit; text-decoration: none;">sno_w2026</a> - 기획 / 프로그래밍 / 디자인</li>
-        <li>🚶‍♂️ <a href="https://www.roblox.com/users/2058595138/profile" target="_blank" style="color: inherit; text-decoration: none;">WALK</a> - 디자인 / 홈페이지 제작</li>
+        <li>❄️ <a href="https://www.roblox.com/users/2542821031/profile" target="_blank">sno_w2026</a> - 기획 / 프로그래밍 / 디자인</li>
+        <li>🚶‍♂️ <a href="https://www.roblox.com/users/2058595138/profile" target="_blank">WALK</a> - 디자인 / 홈페이지 제작</li>
       </ul>
     </div>
 
@@ -263,6 +246,8 @@
 
     function showSection(id) {
       const sections = document.querySelectorAll('.section');
+      const navLinks = document.querySelectorAll('nav a');
+      
       sections.forEach(section => {
         section.classList.remove('active');
         section.style.opacity = 0;
@@ -271,6 +256,9 @@
       const target = document.getElementById(id);
       target.classList.add('active');
       setTimeout(() => target.style.opacity = 1, 50);
+
+      navLinks.forEach(link => link.classList.remove('active'));
+      document.getElementById('nav-' + id).classList.add('active');
 
       if (window.innerWidth < 768) {
         document.getElementById('nav').classList.remove('show');
