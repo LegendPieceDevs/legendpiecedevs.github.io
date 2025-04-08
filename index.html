@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Legend Piece</title>
   <link rel="icon" type="image/png" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --header-height: 70px;
-      --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --background-color: #d6eaff; /* 하늘색 */
-      --header-color: #b0d4f1;     /* 약간 진한 하늘색 */
-      --shadow-color: #2a4a8a;     /* 남색 그림자 */
-      --nav-active-color: #1d4e89; /* 선택된 메뉴 테두리 색상 */
-      --deep-blue: #0f2e6d;
-      --soft-gray: #888;
-      --dev-name-color: #183c78;
+      --main-font: 'Quicksand', sans-serif;
+      --header-bg: #cbe2ff;
+      --nav-active-color: #004080;
+      --title-color: #003366;
+      --subtitle-color: rgba(0, 0, 0, 0.6);
+      --selected-border: 2px solid #004080;
+      --background-color: #d8ecff;
     }
 
     * {
@@ -28,42 +28,81 @@
       font-family: var(--main-font);
       background-color: var(--background-color);
       color: #222;
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
     header {
       height: var(--header-height);
-      background-color: var(--header-color);
+      background-color: var(--header-bg);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 1.5rem;
-      box-shadow: 0 4px 10px var(--shadow-color);
+      box-shadow: 0 2px 8px rgba(0, 51, 102, 0.1); /* 연한 남색 그림자 */
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 10;
     }
 
     .logo img {
       height: 50px;
     }
 
+    .menu-toggle {
+      font-size: 2rem;
+      color: #333;
+      cursor: pointer;
+      display: block;
+    }
+
     nav {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: var(--header-height);
+      left: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.95);
+    }
+
+    nav.show {
       display: flex;
-      gap: 1.5rem;
     }
 
     nav a {
-      text-decoration: none;
       color: #222;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      transition: all 0.3s;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 1rem;
+      text-align: center;
+      transition: background-color 0.3s, border 0.3s ease;
     }
 
     nav a.active {
-      border: 2px solid var(--nav-active-color);
-      background-color: rgba(255, 255, 255, 0.2);
+      border-bottom: var(--selected-border);
+      color: var(--nav-active-color);
+    }
+
+    nav a:hover {
+      background-color: #e6f0ff;
+    }
+
+    @media (min-width: 768px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      nav {
+        display: flex !important;
+        position: static;
+        flex-direction: row;
+        background-color: transparent;
+      }
+
+      nav a {
+        padding: 0 1rem;
+      }
     }
 
     main {
@@ -74,49 +113,52 @@
     }
 
     .section {
-      max-width: 800px;
       width: 100%;
+      max-width: 900px;
       text-align: center;
       display: none;
+      transition: opacity 0.4s ease;
     }
 
     .section.active {
       display: block;
-    }
-
-    .main-logo {
-      max-width: 400px;
-      width: 100%;
-      margin-bottom: 1rem;
+      opacity: 1;
     }
 
     .section h1 {
-      font-size: 2.5rem;
+      font-size: 2rem;
+      margin: 1.5rem 0 1rem;
+      color: var(--title-color);
+    }
+
+    .section p {
+      font-size: 1rem;
+      color: var(--subtitle-color);
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+
+    .main-logo {
+      width: 80%;
+      max-width: 500px;
       margin-bottom: 1rem;
-    }
-
-    .welcome-title {
-      color: var(--deep-blue);
-    }
-
-    .in-dev {
-      font-size: 1.2rem;
-      color: var(--soft-gray);
     }
 
     ul {
       list-style: none;
       padding: 0;
       font-size: 1rem;
-      text-align: left;
-      max-width: 400px;
-      margin: 0 auto;
+    }
+
+    ul li {
+      margin: 0.5rem 0;
+      font-weight: 600;
+      color: #002e66;
     }
 
     ul li a {
-      color: var(--dev-name-color);
       text-decoration: none;
-      font-weight: bold;
+      color: inherit;
     }
 
     .progress-gallery {
@@ -137,10 +179,25 @@
       font-size: 1rem;
     }
 
-    @media (min-width: 768px) {
-      nav {
-        justify-content: flex-end;
-      }
+    /* Smooth tab transition */
+    nav a {
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 5px;
+      width: 0;
+      height: 2px;
+      background: #004080;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+      left: 0;
     }
   </style>
 </head>
@@ -149,7 +206,8 @@
     <div class="logo">
       <img src="logo.png" alt="Legend Piece 로고" />
     </div>
-    <nav>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="nav">
       <a href="#" onclick="showSection('main', this)" class="active">메인</a>
       <a href="#" onclick="showSection('dev', this)">개발자</a>
       <a href="#" onclick="showSection('progress', this)">개발 진행 상황</a>
@@ -159,14 +217,15 @@
 
   <main>
     <div id="main" class="section active">
-      <h1 class="welcome-title">Welcome To Legend Piece!</h1>
-      <p class="in-dev">In Dev...</p>
+      <img src="logo2.png" alt="Legend Piece 메인 로고" class="main-logo" />
+      <h1>Welcome To Legend Piece!</h1>
+      <p>In Dev...</p>
     </div>
 
     <div id="dev" class="section">
       <h1>Developer Introduce</h1>
       <p>Legend Piece의 개발자들</p>
-      <ul>
+      <ul style="margin-top: 2rem;">
         <li>❄️ <a href="https://www.roblox.com/users/2542821031/profile" target="_blank">sno_w2026</a> - 기획 / 프로그래밍 / 디자인</li>
         <li>🚶‍♂️ <a href="https://www.roblox.com/users/2058595138/profile" target="_blank">WALK</a> - 디자인 / 홈페이지 제작</li>
       </ul>
@@ -202,16 +261,25 @@
   </main>
 
   <script>
+    function toggleMenu() {
+      document.getElementById('nav').classList.toggle('show');
+    }
+
     function showSection(id, el) {
       document.querySelectorAll('.section').forEach(section => {
         section.classList.remove('active');
       });
-      document.getElementById(id).classList.add('active');
 
       document.querySelectorAll('nav a').forEach(link => {
         link.classList.remove('active');
       });
-      el.classList.add('active');
+
+      document.getElementById(id).classList.add('active');
+      if (el) el.classList.add('active');
+
+      if (window.innerWidth < 768) {
+        document.getElementById('nav').classList.remove('show');
+      }
     }
   </script>
 </body>
