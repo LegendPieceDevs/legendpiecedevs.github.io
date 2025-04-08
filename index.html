@@ -9,15 +9,12 @@
     :root {
       --header-height: 70px;
       --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --text-color: #222;
-      --navy-color: #1e3a5f;
-      --highlight-color: #154278;
-      --developer-name-color: #123056;
-      --welcome-color: #1a2e55;
-      --in-dev-color: rgba(0, 0, 0, 0.3);
-      --background-start: #f6fbff;
-      --background-middle: #d6ebff;
-      --background-end: #c0e0ff;
+      --navy: #1e3a8a;
+      --deep-blue: #1c3d91;
+      --gradient-start: #f8fbff;
+      --gradient-end: #cce3ff;
+      --highlight: #184a99;
+      --header-bg: #e6f0ff;
     }
 
     * {
@@ -28,68 +25,53 @@
 
     body {
       font-family: var(--main-font);
-      background: linear-gradient(to bottom, var(--background-start), var(--background-middle), var(--background-end));
-      color: var(--text-color);
+      background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+      color: #222;
       font-size: 1rem;
       line-height: 1.6;
     }
 
     header {
       height: var(--header-height);
-      background-color: #d7ecfa;
+      background-color: var(--header-bg);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 1.5rem;
-      box-shadow: 0 4px 10px rgba(30, 58, 95, 0.3);
+      box-shadow: 0 4px 8px rgba(30, 58, 138, 0.3);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 10;
     }
 
-    .logo img {
-      height: 50px;
-      filter: hue-rotate(200deg) saturate(160%);
-    }
-
-    .menu-toggle {
-      font-size: 2rem;
-      color: var(--navy-color);
-      cursor: pointer;
-      display: block;
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--navy);
+      border: 2px solid var(--navy);
+      padding: 5px 10px;
+      border-radius: 6px;
+      background: linear-gradient(to bottom, #ffffff, #e6f0ff);
     }
 
     nav {
-      position: absolute;
-      top: var(--header-height);
-      left: 0;
-      width: 100%;
-      background-color: rgba(255, 255, 255, 0.95);
-      display: none;
-      flex-direction: column;
-    }
-
-    nav.show {
       display: flex;
+      gap: 1rem;
     }
 
     nav a {
-      color: var(--navy-color);
+      color: #333;
       text-decoration: none;
       font-size: 1rem;
-      padding: 1rem;
-      text-align: center;
-      border-bottom: 1px solid #ddd;
-      transition: background-color 0.3s, color 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: 0.3s;
     }
 
-    nav a:hover {
-      background-color: #f0f0f0;
-    }
-
+    nav a:hover,
     nav a.active {
-      color: var(--highlight-color);
-      font-weight: bold;
+      background-color: var(--highlight);
+      color: #fff;
     }
 
     main {
@@ -101,21 +83,19 @@
 
     .section {
       display: none;
+      max-width: 800px;
       width: 100%;
-      max-width: 900px;
       text-align: center;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
     }
 
     .section.active {
       display: block;
-      opacity: 1;
     }
 
     .section h1 {
-      font-size: 2.2rem;
+      font-size: 2rem;
       margin-bottom: 1rem;
+      color: var(--navy);
     }
 
     .section p {
@@ -123,27 +103,21 @@
       margin-bottom: 2rem;
     }
 
-    .main-logo {
-      max-width: 400px;
-      width: 100%;
-      margin-bottom: 1rem;
-      background: none;
-      box-shadow: none;
+    .main-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--navy);
     }
 
-    #main h1 {
-      color: var(--welcome-color);
-    }
-
-    #main p {
-      color: var(--in-dev-color);
+    .main-subtitle {
       font-size: 1.2rem;
+      color: #666;
+      opacity: 0.6;
     }
 
     ul {
       list-style: none;
       padding: 0;
-      font-size: 1rem;
     }
 
     ul li {
@@ -151,8 +125,9 @@
     }
 
     ul li a {
-      color: var(--developer-name-color);
-      font-weight: 500;
+      color: #102a78;
+      font-weight: bold;
+      text-decoration: none;
     }
 
     .progress-gallery {
@@ -160,10 +135,6 @@
       flex-direction: column;
       gap: 2rem;
       margin-top: 2rem;
-    }
-
-    .progress-item {
-      text-align: center;
     }
 
     .progress-item img {
@@ -174,53 +145,31 @@
 
     .progress-item p {
       margin-top: 0.5rem;
-      font-size: 1rem;
+      font-weight: 500;
     }
 
-    @media (min-width: 768px) {
-      .menu-toggle {
-        display: none;
-      }
-
+    @media (max-width: 768px) {
       nav {
-        position: static;
-        display: flex !important;
-        flex-direction: row;
-        background-color: transparent;
-        box-shadow: none;
-      }
-
-      nav a {
-        padding: 0 1.2rem;
-        font-size: 1rem;
-        border: none;
-      }
-
-      nav a:hover {
-        background-color: rgba(0, 0, 0, 0.05);
+        flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="logo.png" alt="Legend Piece 로고" />
-    </div>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <nav id="nav">
+    <div class="logo-text">LEGEND PIECE</div>
+    <nav>
       <a href="#" onclick="showSection('main', this)" class="active">메인</a>
       <a href="#" onclick="showSection('dev', this)">개발자</a>
-      <a href="#" onclick="showSection('progress', this)">개발 진행 상황</a>
+      <a href="#" onclick="showSection('progress', this)">개발 진행상황</a>
       <a href="#" onclick="showSection('support', this)">후원</a>
     </nav>
   </header>
 
   <main>
     <div id="main" class="section active">
-      <img src="logo2.png" alt="Legend Piece 메인 로고" class="main-logo" />
-      <h1>Welcome To Legend Piece!</h1>
-      <p>In Dev...</p>
+      <h1 class="main-title">Welcome To Legend Piece!</h1>
+      <p class="main-subtitle">In Dev...</p>
     </div>
 
     <div id="dev" class="section">
@@ -262,28 +211,14 @@
   </main>
 
   <script>
-    function toggleMenu() {
-      document.getElementById('nav').classList.toggle('show');
-    }
-
-    function showSection(id, element) {
+    function showSection(id, link) {
       const sections = document.querySelectorAll('.section');
-      sections.forEach(section => {
-        section.classList.remove('active');
-        section.style.opacity = 0;
-      });
-
-      const target = document.getElementById(id);
-      target.classList.add('active');
-      setTimeout(() => target.style.opacity = 1, 50);
+      sections.forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
 
       const links = document.querySelectorAll('nav a');
-      links.forEach(link => link.classList.remove('active'));
-      if (element) element.classList.add('active');
-
-      if (window.innerWidth < 768) {
-        document.getElementById('nav').classList.remove('show');
-      }
+      links.forEach(a => a.classList.remove('active'));
+      link.classList.add('active');
     }
   </script>
 </body>
