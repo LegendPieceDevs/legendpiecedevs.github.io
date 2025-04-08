@@ -100,16 +100,25 @@
       text-align: center;
       opacity: 0;
       transition: opacity 0.4s ease-in-out;
-
-      background: rgba(255, 255, 255, 0.7);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
     }
 
     .section.active {
       display: block;
       opacity: 1;
+    }
+
+    /* 메인 섹션: 배경과 자연스럽게 연결 */
+    #main {
+      background: none;
+      padding: 3rem 1rem;
+    }
+
+    /* 다른 섹션들은 박스 형태 유지 */
+    #dev, #progress, #support {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
     }
 
     .section h1 {
