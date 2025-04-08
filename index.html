@@ -9,7 +9,7 @@
     :root {
       --header-height: 70px;
       --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --primary-color: rgba(255, 255, 255, 0.9);
+      --primary-color: rgba(255, 255, 255, 0.95);
       --text-color: #222;
       --gradient-start: #ffffff;
       --gradient-end: #e6f2ff;
@@ -21,9 +21,13 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
+      height: 100%;
       font-family: var(--main-font);
       background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: scroll;
       color: var(--text-color);
       font-size: 1rem;
       line-height: 1.6;
