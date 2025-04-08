@@ -7,36 +7,36 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <style>
     :root {
-      --primary-color: #222;
-      --accent-color: #444;
-      --bg-color: #f9f9f9;
-      --text-color: #333;
       --header-height: 70px;
-      --font-family: 'Segoe UI', 'Roboto', 'Helvetica', sans-serif;
+      --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --primary-color: #1a1a1a;
+      --accent-color: #2e8bff;
+      --background-color: #f9f9f9;
+      --text-color: #333;
     }
 
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      font-family: var(--font-family);
-      background-color: var(--bg-color);
+      font-family: var(--main-font);
+      background-color: var(--background-color);
       color: var(--text-color);
       font-size: 1rem;
+      line-height: 1.6;
     }
 
     header {
-      background-color: var(--primary-color);
-      color: white;
       height: var(--header-height);
-      padding: 0 2rem;
+      background-color: var(--primary-color);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 0 1.5rem;
       position: relative;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .logo img {
@@ -45,6 +45,7 @@
 
     .menu-toggle {
       font-size: 2rem;
+      color: #fff;
       cursor: pointer;
       display: block;
     }
@@ -54,9 +55,10 @@
       top: var(--header-height);
       left: 0;
       width: 100%;
-      background-color: var(--accent-color);
-      display: none;
+      background-color: #222;
       flex-direction: column;
+      display: none;
+      z-index: 100;
     }
 
     nav.show {
@@ -66,13 +68,84 @@
     nav a {
       color: white;
       text-decoration: none;
+      font-size: 1rem;
       padding: 1rem;
       text-align: center;
-      transition: background 0.3s;
+      border-bottom: 1px solid #333;
+      transition: background-color 0.3s;
     }
 
     nav a:hover {
-      background-color: #555;
+      background-color: #333;
+    }
+
+    main {
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section {
+      display: none;
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    .section.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .section h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .section p {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .main-logo {
+      max-width: 400px;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      font-size: 1rem;
+    }
+
+    ul li {
+      margin-bottom: 0.75rem;
+    }
+
+    .progress-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .progress-item {
+      text-align: center;
+    }
+
+    .progress-item img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .progress-item p {
+      margin-top: 0.75rem;
+      font-size: 1rem;
     }
 
     @media (min-width: 768px) {
@@ -89,79 +162,20 @@
 
       nav a {
         padding: 0 1rem;
+        font-size: 1rem;
+        border: none;
       }
-    }
 
-    main {
-      padding: 2rem 1rem;
-      max-width: 960px;
-      margin: auto;
-    }
-
-    .section {
-      display: none;
-      background: white;
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      opacity: 0;
-      transition: opacity 0.4s ease-in-out;
-    }
-
-    .section.active {
-      display: block;
-      opacity: 1;
-    }
-
-    .section h1 {
-      font-size: 1.75rem;
-      margin-bottom: 1rem;
-    }
-
-    .section p {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .main-logo {
-      max-width: 400px;
-      width: 100%;
-      margin: 0 auto 1.5rem;
-      display: block;
-    }
-
-    .section ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .section ul li {
-      margin: 0.75rem 0;
-      font-size: 1rem;
-    }
-
-    .progress-gallery {
-      display: grid;
-      gap: 2rem;
-    }
-
-    .progress-item img {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .progress-item p {
-      margin-top: 0.75rem;
-      font-size: 1rem;
+      nav a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">
-      <img src="logo2.png" alt="Legend Piece 로고" />
+      <img src="logo.png" alt="Legend Piece 로고" />
     </div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <nav id="nav">
@@ -176,7 +190,7 @@
     <div id="main" class="section active">
       <img src="logo2.png" alt="Legend Piece 메인 로고" class="main-logo" />
       <h1>Welcome To Legend Piece!</h1>
-      <p>In Dev..</p>
+      <p>In Dev...</p>
     </div>
 
     <div id="dev" class="section">
@@ -213,7 +227,7 @@
 
     <div id="support" class="section">
       <h1>Donate</h1>
-      <p>후원은 게임 개발에 매우 큰 도움이 됩니다.</p>
+      <p>후원은 게임 개발에 큰 도움이 됩니다. 감사합니다!</p>
     </div>
   </main>
 
