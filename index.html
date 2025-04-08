@@ -5,17 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Legend Piece</title>
   <link rel="icon" type="image/png" href="favicon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --header-height: 70px;
-      --main-font: 'Quicksand', sans-serif;
-      --header-bg: #cbe2ff;
-      --nav-active-color: #004080;
-      --title-color: #003366;
-      --subtitle-color: rgba(0, 0, 0, 0.6);
-      --selected-border: 2px solid #004080;
-      --background-color: #d8ecff;
+      --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --header-bg: #dbefff;
+      --accent-color: #003366;
+      --highlight-color: #004080;
+      --hover-box: rgba(0, 51, 102, 0.1);
     }
 
     * {
@@ -26,7 +23,7 @@
 
     body {
       font-family: var(--main-font);
-      background-color: var(--background-color);
+      background-color: #e6f2ff;
       color: #222;
       font-size: 1rem;
       line-height: 1.6;
@@ -37,74 +34,56 @@
       background-color: var(--header-bg);
       display: flex;
       align-items: center;
-      justify-content: space-between;
       padding: 0 2rem;
-      box-shadow: 0 2px 8px rgba(0, 51, 102, 0.1);
-      position: sticky;
-      top: 0;
+      box-shadow: 0 4px 8px rgba(0, 51, 102, 0.1);
+      position: relative;
       z-index: 10;
     }
 
-    .logo-text {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #003366;
-      line-height: 1.2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-right: 1.5rem; /* 메뉴와 간격 */
-      user-select: none;
+    .logo img {
+      height: 60px;
+      margin-right: 2rem;
+      transform: translateY(5%);
     }
 
     nav {
       display: flex;
+      gap: 1.5rem;
       align-items: center;
-      gap: 1.2rem;
     }
 
     nav a {
-      position: relative;
-      padding: 0.5rem 1rem;
-      color: #222;
       text-decoration: none;
-      font-size: 1rem;
-      border-radius: 6px;
+      color: #003366;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 5px;
+      position: relative;
       transition: all 0.3s ease;
     }
 
     nav a:hover {
-      box-shadow: 0 0 0 2px rgba(0, 64, 128, 0.2);
+      background-color: var(--hover-box);
     }
 
     nav a.active {
-      color: var(--nav-active-color);
-    }
-
-    nav a.active::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -2px;
-      width: 100%;
-      height: 2px;
-      background-color: var(--nav-active-color);
-      border-radius: 2px;
+      border-bottom: 2px solid var(--highlight-color);
     }
 
     main {
-      padding: 2rem 1rem;
+      padding: 3rem 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     .section {
-      width: 100%;
-      max-width: 900px;
-      text-align: center;
       display: none;
-      transition: opacity 0.4s ease;
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
     }
 
     .section.active {
@@ -114,38 +93,32 @@
 
     .section h1 {
       font-size: 2rem;
-      margin: 1.5rem 0 1rem;
-      color: var(--title-color);
+      margin-bottom: 1rem;
+      color: var(--accent-color);
     }
 
     .section p {
       font-size: 1rem;
-      color: var(--subtitle-color);
-      font-weight: 500;
       margin-bottom: 2rem;
+      font-weight: 500;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .main-logo {
-      width: 80%;
-      max-width: 500px;
+      max-width: 400px;
+      width: 100%;
       margin-bottom: 1rem;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      font-size: 1rem;
+    .developer-list {
+      text-align: center;
+      margin-top: 2rem;
     }
 
-    ul li {
-      margin: 0.5rem 0;
-      font-weight: 600;
-      color: #002e66;
-    }
-
-    ul li a {
-      text-decoration: none;
-      color: inherit;
+    .developer-list li {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      color: #002244;
     }
 
     .progress-gallery {
@@ -166,21 +139,31 @@
       font-size: 1rem;
     }
 
-    @media (max-width: 768px) {
+    #main h1 {
+      color: var(--accent-color);
+    }
+
+    #main p {
+      opacity: 0.5;
+    }
+
+    @media (min-width: 768px) {
+      header {
+        justify-content: flex-start;
+      }
+
       nav {
-        flex-direction: column;
-        align-items: flex-start;
+        margin-left: auto;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo-text">
-      <span>로</span>
-      <span>고</span>
+    <div class="logo">
+      <img src="logo2.png" alt="Legend Piece 로고" />
     </div>
-    <nav id="nav">
+    <nav>
       <a href="#" onclick="showSection('main', this)" class="active">메인</a>
       <a href="#" onclick="showSection('dev', this)">개발자</a>
       <a href="#" onclick="showSection('progress', this)">개발 진행 상황</a>
@@ -198,9 +181,9 @@
     <div id="dev" class="section">
       <h1>Developer Introduce</h1>
       <p>Legend Piece의 개발자들</p>
-      <ul style="margin-top: 2rem;">
-        <li>❄️ <a href="https://www.roblox.com/users/2542821031/profile" target="_blank">sno_w2026</a> - 기획 / 프로그래밍 / 디자인</li>
-        <li>🚶‍♂️ <a href="https://www.roblox.com/users/2058595138/profile" target="_blank">WALK</a> - 디자인 / 홈페이지 제작</li>
+      <ul class="developer-list">
+        <li>❄️ <a href="https://www.roblox.com/users/2542821031/profile" target="_blank" style="color: inherit; text-decoration: none;">sno_w2026</a> - 기획 / 프로그래밍 / 디자인</li>
+        <li>🚶‍♂️ <a href="https://www.roblox.com/users/2058595138/profile" target="_blank" style="color: inherit; text-decoration: none;">WALK</a> - 디자인 / 홈페이지 제작</li>
       </ul>
     </div>
 
@@ -234,17 +217,19 @@
   </main>
 
   <script>
-    function showSection(id, el) {
-      document.querySelectorAll('.section').forEach(section => {
-        section.classList.remove('active');
+    function showSection(id, element) {
+      document.querySelectorAll('.section').forEach(s => {
+        s.classList.remove('active');
+        s.style.opacity = 0;
       });
 
-      document.querySelectorAll('nav a').forEach(link => {
-        link.classList.remove('active');
-      });
+      const target = document.getElementById(id);
+      target.classList.add('active');
+      setTimeout(() => target.style.opacity = 1, 50);
 
-      document.getElementById(id).classList.add('active');
-      if (el) el.classList.add('active');
+      // 메뉴 강조
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      element.classList.add('active');
     }
   </script>
 </body>
