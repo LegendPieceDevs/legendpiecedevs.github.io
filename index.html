@@ -12,7 +12,7 @@
       --header-bg: #dbefff;
       --accent-color: #003366;
       --highlight-color: #004080;
-      --hover-box: rgba(0, 51, 102, 0.1);
+      --hover-box: rgba(0, 51, 102, 0.15);
     }
 
     * {
@@ -24,9 +24,6 @@
     body {
       font-family: var(--main-font);
       background-color: #e6f2ff;
-      color: #222;
-      font-size: 1rem;
-      line-height: 1.6;
     }
 
     header {
@@ -36,7 +33,6 @@
       align-items: center;
       padding: 0 2rem;
       box-shadow: 0 4px 8px rgba(0, 51, 102, 0.1);
-      position: relative;
       z-index: 10;
     }
 
@@ -54,20 +50,23 @@
 
     nav a {
       text-decoration: none;
-      color: #003366;
+      color: var(--accent-color);
       font-weight: 600;
       padding: 8px 12px;
-      border-radius: 5px;
+      border-radius: 6px;
       position: relative;
       transition: all 0.3s ease;
     }
 
     nav a:hover {
       background-color: var(--hover-box);
+      box-shadow: 0 0 8px rgba(0, 51, 102, 0.3);
     }
 
     nav a.active {
-      border-bottom: 2px solid var(--highlight-color);
+      border-bottom: 3px solid var(--accent-color);
+      background-color: rgba(0, 51, 102, 0.1);
+      box-shadow: 0 0 8px rgba(0, 51, 102, 0.2);
     }
 
     main {
@@ -101,7 +100,6 @@
       font-size: 1rem;
       margin-bottom: 2rem;
       font-weight: 500;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .main-logo {
@@ -182,8 +180,8 @@
       <h1>Developer Introduce</h1>
       <p>Legend Piece의 개발자들</p>
       <ul class="developer-list">
-        <li>❄️ <a href="https://www.roblox.com/users/2542821031/profile" target="_blank" style="color: inherit; text-decoration: none;">sno_w2026</a> - 기획 / 프로그래밍 / 디자인</li>
-        <li>🚶‍♂️ <a href="https://www.roblox.com/users/2058595138/profile" target="_blank" style="color: inherit; text-decoration: none;">WALK</a> - 디자인 / 홈페이지 제작</li>
+        <li>❄️ sno_w2026 - 기획 / 프로그래밍 / 디자인</li>
+        <li>🚶‍♂️ WALK - 디자인 / 홈페이지 제작</li>
       </ul>
     </div>
 
