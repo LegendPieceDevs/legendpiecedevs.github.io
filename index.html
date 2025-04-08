@@ -9,10 +9,12 @@
     :root {
       --header-height: 70px;
       --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --header-bg: #dbefff;
-      --accent-color: #003366;
-      --highlight-color: #004080;
-      --hover-box: rgba(0, 51, 102, 0.15);
+      --text-color: #222;
+      --header-bg: #b5d6f5; /* 살짝 더 진한 하늘색 */
+      --nav-hover-bg: rgba(255, 255, 255, 0.6);
+      --active-color: #2c4a87; /* 파란색보다 진한 선택 강조 색 */
+      --welcome-color: #1f3a70; /* 남색 */
+      --subtext-color: rgba(0, 0, 0, 0.4); /* In Dev... */
     }
 
     * {
@@ -23,7 +25,8 @@
 
     body {
       font-family: var(--main-font);
-      background-color: #e6f2ff;
+      background-color: #d9ecff;
+      color: var(--text-color);
     }
 
     header {
@@ -31,92 +34,103 @@
       background-color: var(--header-bg);
       display: flex;
       align-items: center;
+      justify-content: space-between;
       padding: 0 2rem;
-      box-shadow: 0 4px 8px rgba(0, 51, 102, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 48, 112, 0.3); /* 남색 그림자 */
+      position: relative;
       z-index: 10;
     }
 
     .logo img {
       height: 60px;
-      margin-right: 2rem;
+      object-fit: contain;
       transform: translateY(5%);
     }
 
     nav {
       display: flex;
       gap: 1.5rem;
-      align-items: center;
     }
 
     nav a {
+      color: #1d2f53;
       text-decoration: none;
-      color: var(--accent-color);
-      font-weight: 600;
-      padding: 8px 12px;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
       border-radius: 6px;
       position: relative;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
     }
 
     nav a:hover {
-      background-color: var(--hover-box);
-      box-shadow: 0 0 8px rgba(0, 51, 102, 0.3);
+      background-color: var(--nav-hover-bg);
+      box-shadow: 0 0 0 2px #99bbdd;
     }
 
     nav a.active {
-      border-bottom: 3px solid var(--accent-color);
-      background-color: rgba(0, 51, 102, 0.1);
-      box-shadow: 0 0 8px rgba(0, 51, 102, 0.2);
+      border-bottom: 3px solid var(--active-color);
     }
 
     main {
-      padding: 3rem 1rem;
+      padding: 2.5rem 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
     }
 
     .section {
       display: none;
       max-width: 800px;
       width: 100%;
-      text-align: center;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
     }
 
     .section.active {
       display: block;
-      opacity: 1;
-    }
-
-    .section h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: var(--accent-color);
-    }
-
-    .section p {
-      font-size: 1rem;
-      margin-bottom: 2rem;
-      font-weight: 500;
     }
 
     .main-logo {
-      max-width: 400px;
-      width: 100%;
+      max-width: 320px;
       margin-bottom: 1rem;
     }
 
-    .developer-list {
-      text-align: center;
-      margin-top: 2rem;
+    h1 {
+      font-size: 2.3rem;
+      color: var(--welcome-color);
+      margin-bottom: 1rem;
     }
 
-    .developer-list li {
+    .subtitle {
+      color: var(--subtext-color);
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+
+    .section p {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 2rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 1rem;
+    }
+
+    ul li {
       margin-bottom: 1rem;
-      font-size: 1.1rem;
-      color: #002244;
+      font-size: 1.05rem;
+      color: #102244;
+      font-weight: 600;
+    }
+
+    ul li a {
+      color: #102244;
+      text-decoration: none;
     }
 
     .progress-gallery {
@@ -137,21 +151,17 @@
       font-size: 1rem;
     }
 
-    #main h1 {
-      color: var(--accent-color);
-    }
-
-    #main p {
-      opacity: 0.5;
-    }
-
     @media (min-width: 768px) {
-      header {
-        justify-content: flex-start;
+      main {
+        padding: 3rem;
       }
-
-      nav {
-        margin-left: auto;
+      .progress-gallery {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .progress-item {
+        width: 48%;
       }
     }
   </style>
@@ -161,7 +171,7 @@
     <div class="logo">
       <img src="logo2.png" alt="Legend Piece 로고" />
     </div>
-    <nav>
+    <nav id="nav">
       <a href="#" onclick="showSection('main', this)" class="active">메인</a>
       <a href="#" onclick="showSection('dev', this)">개발자</a>
       <a href="#" onclick="showSection('progress', this)">개발 진행 상황</a>
@@ -173,15 +183,15 @@
     <div id="main" class="section active">
       <img src="logo2.png" alt="Legend Piece 메인 로고" class="main-logo" />
       <h1>Welcome To Legend Piece!</h1>
-      <p>In Dev...</p>
+      <p class="subtitle">In Dev...</p>
     </div>
 
     <div id="dev" class="section">
       <h1>Developer Introduce</h1>
       <p>Legend Piece의 개발자들</p>
-      <ul class="developer-list">
-        <li>❄️ sno_w2026 - 기획 / 프로그래밍 / 디자인</li>
-        <li>🚶‍♂️ WALK - 디자인 / 홈페이지 제작</li>
+      <ul style="margin-top: 2rem;">
+        <li>❄️ <a href="https://www.roblox.com/users/2542821031/profile" target="_blank">sno_w2026</a> - 기획 / 프로그래밍 / 디자인</li>
+        <li>🚶‍♂️ <a href="https://www.roblox.com/users/2058595138/profile" target="_blank">WALK</a> - 디자인 / 홈페이지 제작</li>
       </ul>
     </div>
 
@@ -215,19 +225,14 @@
   </main>
 
   <script>
-    function showSection(id, element) {
-      document.querySelectorAll('.section').forEach(s => {
-        s.classList.remove('active');
-        s.style.opacity = 0;
-      });
+    function showSection(id, el) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => section.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
 
-      const target = document.getElementById(id);
-      target.classList.add('active');
-      setTimeout(() => target.style.opacity = 1, 50);
-
-      // 메뉴 강조
-      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-      element.classList.add('active');
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(link => link.classList.remove('active'));
+      el.classList.add('active');
     }
   </script>
 </body>
