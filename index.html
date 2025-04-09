@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -7,117 +7,226 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background-color: #0c0b12;
+      background-color: #0d0c14;
       color: white;
       font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
     }
 
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
+      padding: 16px 32px;
+      background-color: #0d0c14;
+      border-bottom: 1px solid #222;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
     }
 
-    .logo-text {
-      font-weight: bold;
+    .logo {
       font-size: 20px;
+      font-weight: bold;
+      color: white;
     }
 
-    nav a {
-      margin-left: 20px;
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
       color: white;
       text-decoration: none;
-      cursor: pointer;
+      transition: 0.3s;
     }
 
-    .page {
+    nav ul li a:hover {
+      border-bottom: 2px solid #4aa3ff;
+    }
+
+    main {
+      padding-top: 80px;
+    }
+
+    .content-section {
       display: none;
-      height: calc(100vh - 60px);
-      padding: 40px;
-      box-sizing: border-box;
-      position: relative;
+      padding: 60px 20px;
+      min-height: calc(100vh - 140px);
+      text-align: center;
     }
 
-    .page.active {
+    .content-section.active {
       display: block;
     }
 
-    .main-content {
-      position: absolute;
-      top: 40px;
-      left: 40px;
+    .main-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 20px 40px;
     }
 
-    .main-logo {
-      position: absolute;
-      top: 40px;
-      right: 40px;
-      max-width: 200px;
+    .main-text {
+      text-align: left;
     }
 
-    .footer {
-      position: fixed;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #aaa;
+    .main-text p {
+      margin: 0;
+      line-height: 1.4;
     }
 
     .highlight {
-      color: #a259ff;
+      color: #a855f7;
       font-weight: bold;
+    }
+
+    .subtext {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .main-logo-image {
+      height: 80px;
+    }
+
+    .devs {
+      display: flex;
+      justify-content: center;
+      gap: 100px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .dev h3 {
+      margin-bottom: 5px;
+      color: #ffffff;
+    }
+
+    .dev p {
+      margin-bottom: 5px;
+      color: #cccccc;
+    }
+
+    .dev a {
+      color: #a855f7;
+      text-decoration: none;
+    }
+
+    .progress-images {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .progress-images img {
+      width: 300px;
+      border-radius: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #999;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #0d0c14;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-
   <header>
-    <div class="logo-text">Legend</div>
+    <div class="logo">Legend Piece</div>
     <nav>
-      <a onclick="showPage('main')">Main</a>
-      <a onclick="showPage('dev')">Dev</a>
-      <a onclick="showPage('progress')">Progress</a>
-      <a onclick="showPage('donate')">Donate</a>
+      <ul>
+        <li><a href="#main" class="menu" onclick="showSection('main')">Main</a></li>
+        <li><a href="#dev" class="menu" onclick="showSection('dev')">Dev</a></li>
+        <li><a href="#progress" class="menu" onclick="showSection('progress')">Progress</a></li>
+        <li><a href="#donate" class="menu" onclick="showSection('donate')">Donate</a></li>
+      </ul>
     </nav>
   </header>
 
-  <div id="main" class="page active">
-    <div class="main-content">
-      <h1>
-        The <span class="highlight">BEST</span> one piece fan game<br>in the Roblox
-      </h1>
-      <p>^o^</p>
-    </div>
-    <img src="logo2.png" alt="Logo" class="main-logo">
-  </div>
+  <main>
+    <!-- Main Section -->
+    <section id="main" class="content-section active">
+      <div class="main-top-bar">
+        <div class="main-text">
+          <p>The <span class="highlight">BEST</span> one piece fan game<br/>in the Roblox</p>
+          <p class="subtext">^o^</p>
+        </div>
+        <img src="logo2.png" alt="Logo 2" class="main-logo-image" />
+      </div>
+      <h2>Welcome To The Legend Piece</h2>
+      <p>sry its in dev</p>
+    </section>
 
-  <div id="dev" class="page">
-    <h2>Developers</h2>
-  </div>
+    <!-- Dev Section -->
+    <section id="dev" class="content-section">
+      <h2>Developers</h2>
+      <div class="devs">
+        <div class="dev">
+          <h3>sno_w2026</h3>
+          <p>기획 / 스크립트</p>
+          <a href="https://www.roblox.com/users/2542821031/profile" target="_blank">프로필</a>
+        </div>
+        <div class="dev">
+          <h3>WALK</h3>
+          <p>빌드 / UI / 스타일링</p>
+          <a href="https://www.roblox.com/users/2058595138/profile" target="_blank">프로필</a>
+        </div>
+      </div>
+    </section>
 
-  <div id="progress" class="page">
-    <h2>Progress</h2>
-  </div>
+    <!-- Progress Section -->
+    <section id="progress" class="content-section">
+      <h2>Progress</h2>
+      <p>개발 진행 상황입니다!</p>
+      <div class="progress-images">
+        <div>
+          <img src="LP1.png" alt="기본섬" />
+          <p>기본 섬</p>
+        </div>
+        <div>
+          <img src="LP2.png" alt="동굴" />
+          <p>동굴</p>
+        </div>
+        <div>
+          <img src="LP3.png" alt="사막섬" />
+          <p>사막 섬</p>
+        </div>
+        <div>
+          <img src="LP4.png" alt="이펙트" />
+          <p>이펙트</p>
+        </div>
+      </div>
+    </section>
 
-  <div id="donate" class="page">
-    <h2>Donate</h2>
-  </div>
+    <!-- Donate Section -->
+    <section id="donate" class="content-section">
+      <h2>Donate</h2>
+      <p>후원은 개발에 큰 힘이 됩니다!</p>
+    </section>
+  </main>
 
-  <div class="footer">
+  <footer>
     © 2025 Legend Piece Devs. All rights reserved.
-  </div>
+  </footer>
 
   <script>
-    function showPage(pageId) {
-      const pages = document.querySelectorAll('.page');
-      pages.forEach(p => p.classList.remove('active'));
-      document.getElementById(pageId).classList.add('active');
+    function showSection(id) {
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
     }
   </script>
-
 </body>
 </html>
