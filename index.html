@@ -4,12 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Legend Piece</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
   <style>
     :root {
-      --bg: #0a0a13;
-      --text: #fff;
-      --sub: rgba(255, 255, 255, 0.6);
-      --accent: #55aaff;
+      --main-color: #ffffff;
+      --accent-color: #814fff;
+      --bg-color: #0a0a13;
+      --text-sub: rgba(255, 255, 255, 0.6);
     }
 
     * {
@@ -22,45 +23,44 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: var(--bg);
       font-family: 'Segoe UI', sans-serif;
-      color: var(--text);
+      background-color: var(--bg-color);
+      color: var(--main-color);
     }
 
     header {
-      height: 60px;
-      background: var(--bg);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 30px;
       position: fixed;
       width: 100%;
       top: 0;
-      z-index: 10;
+      left: 0;
+      padding: 20px 40px;
+      background-color: var(--bg-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
     }
 
     .logo {
       font-weight: bold;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
 
     nav a {
-      color: var(--text);
       margin-left: 20px;
+      color: var(--main-color);
       text-decoration: none;
-      font-size: 1rem;
       position: relative;
     }
 
     nav a::after {
-      content: '';
+      content: "";
       position: absolute;
-      bottom: -4px;
       left: 0;
-      width: 0%;
+      bottom: -4px;
+      width: 0;
       height: 2px;
-      background: var(--accent);
+      background-color: var(--accent-color);
       transition: 0.3s;
     }
 
@@ -69,98 +69,100 @@
       width: 100%;
     }
 
-    .section {
+    .view {
       display: none;
-      width: 100%;
-      height: calc(100% - 60px);
-      padding-top: 60px;
+      width: 100vw;
+      height: 100vh;
+      padding: 100px 20px 60px;
+      overflow-y: auto;
       position: absolute;
       top: 0;
       left: 0;
     }
 
-    .section.active {
+    .view.active {
       display: block;
     }
 
-    /* Main 전용 요소 */
-    .main-top-text {
-      position: absolute;
-      top: 80px;
-      left: 40px;
-      font-size: 2.5rem;
-      line-height: 1.5;
-    }
-
-    .main-top-text p {
-      font-size: 1.8rem;
-      color: var(--accent);
-    }
-
-    .main-logo2 {
-      position: absolute;
-      top: 80px;
-      right: 40px;
-      width: 180px;
-    }
-
-    /* Dev 섹션 */
-    .dev-content {
+    .main-content {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-top: 80px;
     }
 
-    .dev-box {
-      margin: 20px;
-      text-align: center;
+    .main-text {
+      font-size: 2.2rem;
+      font-weight: bold;
     }
 
-    .dev-box a {
-      color: var(--accent);
+    .main-text p {
+      font-size: 1.5rem;
+      margin-top: 10px;
+      color: var(--text-sub);
+    }
+
+    .main-logo {
+      max-width: 200px;
+      margin-top: -30px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: var(--text-sub);
+    }
+
+    .developer {
+      margin: 1.5rem 0;
+    }
+
+    .developer h3 a {
+      color: var(--main-color);
       text-decoration: none;
     }
 
-    /* Progress */
-    .progress-content {
+    .developer p {
+      margin-top: 0.3rem;
+    }
+
+    .progress-gallery {
       display: flex;
-      justify-content: center;
-      align-items: center;
       flex-wrap: wrap;
-      padding: 40px;
       gap: 20px;
-    }
-
-    .progress-content img {
-      width: 280px;
-      border-radius: 10px;
-    }
-
-    /* Donate */
-    .donate-content {
-      display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100%;
-      font-size: 1.5rem;
+      margin-top: 2rem;
     }
 
-    /* Footer */
+    .progress-gallery img {
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .progress-caption {
+      text-align: center;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+
     footer {
       position: fixed;
       bottom: 10px;
       width: 100%;
       text-align: center;
+      color: var(--text-sub);
       font-size: 0.9rem;
-      color: var(--sub);
+      z-index: 100;
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">Legend</div>
+    <div class="logo">Legend Piece</div>
     <nav>
       <a href="#main" class="active">Main</a>
       <a href="#dev">Dev</a>
@@ -169,63 +171,77 @@
     </nav>
   </header>
 
-  <!-- Main -->
-  <section class="section active" id="main">
-    <div class="main-top-text">
-      <h1>The BEST one piece fan game<br>in the Roblox</h1>
-      <p>^o^</p>
-    </div>
-    <img src="logo2.png" class="main-logo2" />
-  </section>
-
-  <!-- Dev -->
-  <section class="section" id="dev">
-    <div class="dev-content">
-      <div class="dev-box">
-        <h2>sno_w2026</h2>
-        <p>UI 디자인 및 전체 기획</p>
-        <a href="https://www.roblox.com/users/2542821031/profile" target="_blank">프로필</a>
+  <!-- MAIN -->
+  <div id="main" class="view active">
+    <div class="main-content">
+      <div class="main-text">
+        The <span class="highlight">BEST</span> one piece fan game<br />in the Roblox
+        <p>^o^</p>
       </div>
-      <div class="dev-box">
-        <h2>WALK</h2>
-        <p>스크립팅 및 캐릭터 모션</p>
-        <a href="https://www.roblox.com/users/2058595138/profile" target="_blank">프로필</a>
+      <img src="logo2.png" alt="Legend Piece" class="main-logo" />
+    </div>
+  </div>
+
+  <!-- DEV -->
+  <div id="dev" class="view">
+    <h2>Developers</h2>
+    <div class="developer">
+      <h3><a href="https://www.roblox.com/users/2542821031/profile" target="_blank">sno_w2026</a></h3>
+      <p>기획 / 스크립팅 / 디자인</p>
+    </div>
+    <div class="developer">
+      <h3><a href="https://www.roblox.com/users/2058595138/profile" target="_blank">WALK</a></h3>
+      <p>디자인 / 홈페이지 제작</p>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div id="progress" class="view">
+    <h2>Progress</h2>
+    <p>개발 진행 상황입니다!</p>
+    <div class="progress-gallery">
+      <div>
+        <img src="LP1.png" alt="기본섬" />
+        <div class="progress-caption">기본 섬</div>
+      </div>
+      <div>
+        <img src="LP2.png" alt="동굴" />
+        <div class="progress-caption">동굴</div>
+      </div>
+      <div>
+        <img src="LP3.png" alt="사막섬" />
+        <div class="progress-caption">사막 섬</div>
+      </div>
+      <div>
+        <img src="LP4.png" alt="이펙트" />
+        <div class="progress-caption">이펙트</div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Progress -->
-  <section class="section" id="progress">
-    <div class="progress-content">
-      <img src="LP1.png" />
-      <img src="LP2.png" />
-      <img src="LP3.png" />
-      <img src="LP4.png" />
-    </div>
-  </section>
+  <!-- DONATE -->
+  <div id="donate" class="view">
+    <h2>Donate</h2>
+    <p>후원은 개발에 큰 힘이 됩니다!</p>
+  </div>
 
-  <!-- Donate -->
-  <section class="section" id="donate">
-    <div class="donate-content">후원은 개발에 큰 도움이 됩니다!</div>
-  </section>
-
-  <!-- Footer -->
-  <footer>© 2025 Legend Piece Devs. All rights reserved.</footer>
+  <footer>
+    © 2025 Legend Piece Devs. All rights reserved.
+  </footer>
 
   <script>
-    const navLinks = document.querySelectorAll('nav a');
-    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll("nav a");
+    const views = document.querySelectorAll(".view");
 
     navLinks.forEach(link => {
-      link.addEventListener('click', e => {
+      link.addEventListener("click", e => {
         e.preventDefault();
-        const targetId = link.getAttribute('href').replace('#', '');
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-        sections.forEach(sec => {
-          sec.classList.remove('active');
-          if (sec.id === targetId) sec.classList.add('active');
-        });
+        navLinks.forEach(n => n.classList.remove("active"));
+        link.classList.add("active");
+
+        const id = link.getAttribute("href").substring(1);
+        views.forEach(view => view.classList.remove("active"));
+        document.getElementById(id).classList.add("active");
       });
     });
   </script>
