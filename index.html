@@ -5,67 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Legend Piece</title>
   <style>
-    :root {
-      --bg: #0c0b12;
-      --text: #fff;
-      --text-sub: #aaa;
-      --accent: #a259ff;
-    }
     body {
       margin: 0;
       padding: 0;
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: "Segoe UI", sans-serif;
+      background-color: #0c0b12;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
       overflow: hidden;
     }
+
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 20px 40px;
     }
-    .logo {
+
+    .logo-text {
       font-weight: bold;
+      font-size: 20px;
     }
+
     nav a {
-      color: var(--text);
-      text-decoration: none;
       margin-left: 20px;
+      color: white;
+      text-decoration: none;
       cursor: pointer;
     }
+
     .page {
       display: none;
       height: calc(100vh - 60px);
       padding: 40px;
+      box-sizing: border-box;
+      position: relative;
     }
+
     .page.active {
       display: block;
     }
-    .highlight {
-      color: var(--accent);
-      font-weight: bold;
+
+    .main-content {
+      position: absolute;
+      top: 40px;
+      left: 40px;
     }
-    .main-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding-top: 60px;
+
+    .main-logo {
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      max-width: 200px;
     }
+
     .footer {
       position: fixed;
       bottom: 10px;
       width: 100%;
       text-align: center;
-      color: var(--text-sub);
       font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .highlight {
+      color: #a259ff;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo">Legend</div>
+    <div class="logo-text">Legend</div>
     <nav>
       <a onclick="showPage('main')">Main</a>
       <a onclick="showPage('dev')">Dev</a>
@@ -75,48 +86,25 @@
   </header>
 
   <div id="main" class="page active">
-    <div class="main-header">
-      <div>
-        <h1>
-          The <span class="highlight">BEST</span> one piece fan game<br />in the Roblox
-        </h1>
-        <p>^o^</p>
-      </div>
-      <div>
-        <img src="logo2.png" alt="Legend Piece" style="max-width: 180px;" />
-      </div>
+    <div class="main-content">
+      <h1>
+        The <span class="highlight">BEST</span> one piece fan game<br>in the Roblox
+      </h1>
+      <p>^o^</p>
     </div>
+    <img src="logo2.png" alt="Logo" class="main-logo">
   </div>
 
   <div id="dev" class="page">
     <h2>Developers</h2>
-    <div style="display: flex; justify-content: center; gap: 80px; margin-top: 40px;">
-      <div style="text-align: center;">
-        <h3>sno_w2026</h3>
-        <p>기획 / 스크립트</p>
-        <a href="https://www.roblox.com/users/2542821031/profile" target="_blank" style="color: #a259ff;">프로필</a>
-      </div>
-      <div style="text-align: center;">
-        <h3>WALK</h3>
-        <p>빌드 / UI / 스타일링</p>
-        <a href="https://www.roblox.com/users/2058595138/profile" target="_blank" style="color: #a259ff;">프로필</a>
-      </div>
-    </div>
   </div>
 
   <div id="progress" class="page">
     <h2>Progress</h2>
-    <div style="margin-top: 40px;">
-      <img src="LP1.png" alt="LP1" style="max-width: 200px; margin: 10px;" />
-      <img src="LP2.png" alt="LP2" style="max-width: 200px; margin: 10px;" />
-      <img src="LP3.png" alt="LP3" style="max-width: 200px; margin: 10px;" />
-      <img src="LP4.png" alt="LP4" style="max-width: 200px; margin: 10px;" />
-    </div>
   </div>
 
   <div id="donate" class="page">
     <h2>Donate</h2>
-    <p>후원은 준비 중입니다.</p>
   </div>
 
   <div class="footer">
