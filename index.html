@@ -9,7 +9,8 @@
     :root {
       --main-color: #ffffff;
       --accent-color: #814fff;
-      --bg-color: #0a0a13;
+      --bg-color: #12121c;
+      --header-color: #0a0a13;
       --text-sub: rgba(255, 255, 255, 0.6);
     }
 
@@ -25,7 +26,6 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--bg-color);
       color: var(--main-color);
-      overflow: hidden;
     }
 
     header {
@@ -33,12 +33,12 @@
       width: 100%;
       top: 0;
       left: 0;
-      padding: 20px 30px;
-      background-color: var(--bg-color);
+      padding: 20px 40px;
+      background-color: var(--header-color);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 100;
+      z-index: 1000;
     }
 
     .logo {
@@ -48,13 +48,15 @@
 
     nav {
       display: flex;
-      gap: 20px;
+      align-items: center;
     }
 
     nav a {
+      margin-left: 20px;
       color: var(--main-color);
       text-decoration: none;
       position: relative;
+      transition: 0.3s ease;
     }
 
     nav a::after {
@@ -73,6 +75,10 @@
       width: 100%;
     }
 
+    nav a:hover {
+      transform: scale(1.05);
+    }
+
     .hamburger {
       display: none;
       flex-direction: column;
@@ -82,41 +88,31 @@
     .hamburger div {
       width: 25px;
       height: 3px;
-      background-color: var(--main-color);
+      background-color: white;
       margin: 4px 0;
-      transition: 0.3s;
     }
 
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 70px;
-        right: 30px;
-        background: #111;
-        padding: 10px 20px;
-        border-radius: 10px;
-      }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      right: 20px;
+      background-color: var(--header-color);
+      padding: 10px;
+      border-radius: 8px;
+      z-index: 999;
+    }
 
-      nav.show {
-        display: flex;
-      }
-
-      .hamburger {
-        display: flex;
-      }
+    .mobile-nav a {
+      padding: 8px;
     }
 
     .view {
       display: none;
       width: 100vw;
-      height: 100vh;
-      padding: 100px 20px 60px;
-      overflow-y: auto;
-      position: absolute;
-      top: 0;
-      left: 0;
+      min-height: 100vh;
+      padding: 120px 20px 60px;
     }
 
     .view.active {
@@ -130,19 +126,18 @@
       text-align: center;
     }
 
-    .top-row {
+    .main-top {
       display: flex;
       justify-content: space-between;
       width: 100%;
-      max-width: 700px;
+      max-width: 800px;
       margin-bottom: 40px;
     }
 
     .main-text {
-      font-size: 1.6rem;
+      font-size: 2.2rem;
       font-weight: bold;
-      text-align: left;
-      padding-left: 10px;
+      align-self: flex-start;
     }
 
     .main-text .highlight {
@@ -150,32 +145,31 @@
     }
 
     .main-text p {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
+      margin-top: 10px;
       color: var(--text-sub);
     }
 
     .main-logo {
-      max-width: 140px;
-      margin-right: 10px;
+      max-width: 200px;
+      align-self: flex-end;
     }
 
-    .center-text {
-      margin-top: 20px;
-    }
-
-    .center-text h2 {
+    .main-welcome {
       font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
     }
 
-    .center-text p {
+    .main-sub {
       font-size: 1rem;
       color: var(--text-sub);
     }
 
     h2 {
       font-size: 2rem;
-      margin-bottom: 1rem;
       text-align: center;
+      margin-bottom: 1rem;
     }
 
     p {
@@ -191,6 +185,10 @@
     .developer h3 a {
       color: var(--main-color);
       text-decoration: none;
+    }
+
+    .developer p {
+      margin-top: 0.3rem;
     }
 
     .progress-gallery {
@@ -222,44 +220,67 @@
       font-size: 0.9rem;
       z-index: 100;
     }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .main-top {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .main-text,
+      .main-logo {
+        align-self: center;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">Legend Piece</div>
-    <div class="hamburger" id="hamburger">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <nav id="nav">
+    <nav>
       <a href="#main" class="active">Main</a>
       <a href="#dev">Dev</a>
       <a href="#progress">Progress</a>
       <a href="#donate">Donate</a>
     </nav>
+    <div class="hamburger" onclick="toggleMobileNav()">
+      <div></div><div></div><div></div>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#main">Main</a>
+      <a href="#dev">Dev</a>
+      <a href="#progress">Progress</a>
+      <a href="#donate">Donate</a>
+    </div>
   </header>
 
   <!-- MAIN -->
   <div id="main" class="view active">
     <div class="main-content">
-      <div class="top-row">
+      <div class="main-top">
         <div class="main-text">
           The <span class="highlight">BEST</span> one piece fan game<br />in the Roblox
           <p>^o^</p>
         </div>
         <img src="logo2.png" alt="Legend Piece" class="main-logo" />
       </div>
-      <div class="center-text">
-        <h2>Welcome To Legend Piece!</h2>
-        <p>sry its in dev</p>
-      </div>
+      <div class="main-welcome">Welcome To Legend Piece!</div>
+      <div class="main-sub">sry its in dev</div>
     </div>
   </div>
 
   <!-- DEV -->
   <div id="dev" class="view">
     <h2>Developers</h2>
+    <p>Legend Piece의 개발자 소개입니다.</p>
     <div class="developer">
       <h3><a href="https://www.roblox.com/users/2542821031/profile" target="_blank">sno_w2026</a></h3>
       <p>기획 / 스크립팅 / 디자인</p>
@@ -306,32 +327,37 @@
 
   <script>
     const navLinks = document.querySelectorAll("nav a");
+    const mobileLinks = document.querySelectorAll(".mobile-nav a");
     const views = document.querySelectorAll(".view");
-    const hamburger = document.getElementById("hamburger");
-    const nav = document.getElementById("nav");
 
-    // 탭 클릭 시 전환
+    function activateTab(link) {
+      navLinks.forEach(n => n.classList.remove("active"));
+      link.classList.add("active");
+
+      const id = link.getAttribute("href").substring(1);
+      views.forEach(view => view.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+
     navLinks.forEach(link => {
       link.addEventListener("click", e => {
         e.preventDefault();
-        navLinks.forEach(n => n.classList.remove("active"));
-        link.classList.add("active");
-
-        const id = link.getAttribute("href").substring(1);
-        views.forEach(view => view.classList.remove("active"));
-        document.getElementById(id).classList.add("active");
-
-        // 모바일에서 메뉴 닫기
-        if (nav.classList.contains("show")) {
-          nav.classList.remove("show");
-        }
+        activateTab(link);
       });
     });
 
-    // 햄버거 버튼 클릭 시 메뉴 토글
-    hamburger.addEventListener("click", () => {
-      nav.classList.toggle("show");
+    mobileLinks.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        activateTab(link);
+        document.getElementById("mobileNav").style.display = "none";
+      });
     });
+
+    function toggleMobileNav() {
+      const nav = document.getElementById("mobileNav");
+      nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+    }
   </script>
 </body>
 </html>
