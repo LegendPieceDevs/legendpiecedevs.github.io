@@ -33,7 +33,7 @@
       width: 100%;
       top: 0;
       left: 0;
-      padding: 20px 40px;
+      padding: 20px 30px;
       background-color: var(--bg-color);
       display: flex;
       justify-content: space-between;
@@ -46,33 +46,66 @@
       font-size: 1.3rem;
     }
 
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
     nav a {
-  margin-left: 20px;
-  color: var(--main-color);
-  text-decoration: none;
-  position: relative;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
+      color: var(--main-color);
+      text-decoration: none;
+      position: relative;
+    }
 
-nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0;
-  height: 2px;
-  background-color: var(--accent-color);
-  transition: width 0.3s ease-in-out;
-}
-
-nav a:hover::after,
-nav a.active::after {
-  width: 100%;
-}
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent-color);
+      transition: 0.3s;
+    }
 
     nav a:hover::after,
     nav a.active::after {
       width: 100%;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: var(--main-color);
+      margin: 4px 0;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 30px;
+        background: #111;
+        padding: 10px 20px;
+        border-radius: 10px;
+      }
+
+      nav.show {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
     }
 
     .view {
@@ -84,84 +117,80 @@ nav a.active::after {
       position: absolute;
       top: 0;
       left: 0;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      text-align: center;
     }
 
     .view.active {
-      display: flex;
+      display: block;
     }
 
-    .main-top {
-      width: 100%;
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .top-row {
       display: flex;
       justify-content: space-between;
-      padding: 0 80px;
-      margin-top: -30px;
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 40px;
     }
 
-    .main-highlight {
-      font-size: 1.5rem;
+    .main-text {
+      font-size: 1.6rem;
       font-weight: bold;
       text-align: left;
-      align-self: flex-start;
+      padding-left: 10px;
     }
 
-    .main-highlight .highlight-purple {
+    .main-text .highlight {
       color: var(--accent-color);
     }
 
-    .main-sub {
-      font-size: 1.1rem;
+    .main-text p {
+      font-size: 1.2rem;
       color: var(--text-sub);
-      text-align: left;
-      margin-top: 5px;
     }
 
     .main-logo {
-      width: 160px;
-      align-self: flex-end;
+      max-width: 140px;
+      margin-right: 10px;
     }
 
-    .welcome-title {
+    .center-text {
+      margin-top: 20px;
+    }
+
+    .center-text h2 {
       font-size: 2rem;
-      margin-top: 30px;
-      font-weight: bold;
-      font-family: 'Segoe UI', sans-serif;
     }
 
-    .welcome-sub {
+    .center-text p {
       font-size: 1rem;
       color: var(--text-sub);
-      margin-top: 8px;
     }
 
     h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
+      text-align: center;
     }
 
     p {
       color: var(--text-sub);
-    }
-
-    .developer, .progress-gallery, #donate {
       text-align: center;
     }
 
     .developer {
       margin: 1.5rem 0;
+      text-align: center;
     }
 
     .developer h3 a {
       color: var(--main-color);
       text-decoration: none;
-    }
-
-    .developer p {
-      margin-top: 0.3rem;
     }
 
     .progress-gallery {
@@ -198,7 +227,12 @@ nav a.active::after {
 <body>
   <header>
     <div class="logo">Legend Piece</div>
-    <nav>
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav id="nav">
       <a href="#main" class="active">Main</a>
       <a href="#dev">Dev</a>
       <a href="#progress">Progress</a>
@@ -208,17 +242,19 @@ nav a.active::after {
 
   <!-- MAIN -->
   <div id="main" class="view active">
-    <div class="main-top">
-      <div>
-        <div class="main-highlight">
-          The <span class="highlight-purple">BEST</span> one piece fan game<br>in the Roblox
+    <div class="main-content">
+      <div class="top-row">
+        <div class="main-text">
+          The <span class="highlight">BEST</span> one piece fan game<br />in the Roblox
+          <p>^o^</p>
         </div>
-        <div class="main-sub">^o^</div>
+        <img src="logo2.png" alt="Legend Piece" class="main-logo" />
       </div>
-      <img src="logo2.png" alt="Legend Piece Logo" class="main-logo" />
+      <div class="center-text">
+        <h2>Welcome To Legend Piece!</h2>
+        <p>sry its in dev</p>
+      </div>
     </div>
-    <div class="welcome-title">Welcome To Legend Piece!</div>
-    <div class="welcome-sub">sry its in dev</div>
   </div>
 
   <!-- DEV -->
@@ -271,7 +307,10 @@ nav a.active::after {
   <script>
     const navLinks = document.querySelectorAll("nav a");
     const views = document.querySelectorAll(".view");
+    const hamburger = document.getElementById("hamburger");
+    const nav = document.getElementById("nav");
 
+    // 탭 클릭 시 전환
     navLinks.forEach(link => {
       link.addEventListener("click", e => {
         e.preventDefault();
@@ -281,7 +320,17 @@ nav a.active::after {
         const id = link.getAttribute("href").substring(1);
         views.forEach(view => view.classList.remove("active"));
         document.getElementById(id).classList.add("active");
+
+        // 모바일에서 메뉴 닫기
+        if (nav.classList.contains("show")) {
+          nav.classList.remove("show");
+        }
       });
+    });
+
+    // 햄버거 버튼 클릭 시 메뉴 토글
+    hamburger.addEventListener("click", () => {
+      nav.classList.toggle("show");
     });
   </script>
 </body>
