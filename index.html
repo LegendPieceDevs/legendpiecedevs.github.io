@@ -1,244 +1,135 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Legend Piece</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
   <style>
     :root {
-      --main-color: #ffffff;
-      --accent-color: #814fff;
-      --bg-color: #0a0a13;
-      --text-sub: rgba(255, 255, 255, 0.6);
+      --bg: #0c0b12;
+      --text: #fff;
+      --text-sub: #aaa;
+      --accent: #a259ff;
     }
-
-    * {
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--main-color);
-      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", sans-serif;
       overflow: hidden;
     }
-
     header {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      padding: 20px 40px;
-      background-color: var(--bg-color);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 100;
+      padding: 20px 40px;
     }
-
     .logo {
       font-weight: bold;
-      font-size: 1.1rem;
     }
-
     nav a {
-      margin-left: 20px;
-      color: var(--main-color);
+      color: var(--text);
       text-decoration: none;
-      position: relative;
+      margin-left: 20px;
+      cursor: pointer;
     }
-
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 2px;
-      background-color: var(--accent-color);
-      transition: 0.3s;
-    }
-
-    nav a:hover::after,
-    nav a.active::after {
-      width: 100%;
-    }
-
-    .section {
+    .page {
       display: none;
-      height: 100vh;
-      width: 100%;
-      padding-top: 100px;
-      text-align: center;
+      height: calc(100vh - 60px);
+      padding: 40px;
     }
-
-    .section.active {
+    .page.active {
       display: block;
     }
-
-    .hero h1 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--text-sub);
-    }
-
     .highlight {
-      color: var(--accent-color);
+      color: var(--accent);
       font-weight: bold;
     }
-
-    .main-logo {
-      margin-top: 20px;
-      max-width: 150px;
-    }
-
-    .developers {
+    .main-header {
       display: flex;
-      justify-content: center;
-      gap: 100px;
-      margin-top: 2rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-top: 60px;
     }
-
-    .developer {
+    .footer {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
       text-align: center;
-    }
-
-    .developer h3 {
-      font-size: 1.2rem;
-      margin-bottom: 5px;
-    }
-
-    .developer p {
-      color: var(--text-sub);
-    }
-
-    .developer a {
-      color: var(--accent-color);
-      text-decoration: none;
-    }
-
-    .progress-gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      margin-top: 2rem;
-    }
-
-    .progress-gallery img {
-      width: 300px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    }
-
-    .progress-gallery p {
-      margin-top: 0.5rem;
-      color: var(--text-sub);
-    }
-
-    footer {
-      padding: 2rem;
       color: var(--text-sub);
       font-size: 0.9rem;
-      text-align: center;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <div class="logo">Legend Piece</div>
+    <div class="logo">Legend</div>
     <nav>
-      <a href="#main" class="active">Main</a>
-      <a href="#dev">Dev</a>
-      <a href="#progress">Progress</a>
-      <a href="#donate">Donate</a>
+      <a onclick="showPage('main')">Main</a>
+      <a onclick="showPage('dev')">Dev</a>
+      <a onclick="showPage('progress')">Progress</a>
+      <a onclick="showPage('donate')">Donate</a>
     </nav>
   </header>
 
-  <div id="main" class="page active hero" style="display: flex; justify-content: space-between; align-items: flex-start; padding: 80px;">
-  <div style="text-align: left;">
-    <h1 style="font-size: 2rem; margin-bottom: 10px;">
-      The <span class="highlight">BEST</span> one piece fan game<br>in the Roblox
-    </h1>
-    <p style="font-size: 1.1rem; color: var(--text-sub);">^o^</p>
+  <div id="main" class="page active">
+    <div class="main-header">
+      <div>
+        <h1>
+          The <span class="highlight">BEST</span> one piece fan game<br />in the Roblox
+        </h1>
+        <p>^o^</p>
+      </div>
+      <div>
+        <img src="logo2.png" alt="Legend Piece" style="max-width: 180px;" />
+      </div>
+    </div>
   </div>
-  <div>
-    <img src="logo2.png" alt="Legend Piece" style="max-width: 180px;" />
-  </div>
-</div>
 
-  <div id="dev" class="section">
+  <div id="dev" class="page">
     <h2>Developers</h2>
-    <div class="developers">
-      <div class="developer">
+    <div style="display: flex; justify-content: center; gap: 80px; margin-top: 40px;">
+      <div style="text-align: center;">
         <h3>sno_w2026</h3>
         <p>기획 / 스크립트</p>
-        <a href="https://www.roblox.com/users/2542821031/profile" target="_blank">프로필</a>
+        <a href="https://www.roblox.com/users/2542821031/profile" target="_blank" style="color: #a259ff;">프로필</a>
       </div>
-      <div class="developer">
+      <div style="text-align: center;">
         <h3>WALK</h3>
         <p>빌드 / UI / 스타일링</p>
-        <a href="https://www.roblox.com/users/2058595138/profile" target="_blank">프로필</a>
+        <a href="https://www.roblox.com/users/2058595138/profile" target="_blank" style="color: #a259ff;">프로필</a>
       </div>
     </div>
   </div>
 
-  <div id="progress" class="section">
+  <div id="progress" class="page">
     <h2>Progress</h2>
-    <p>개발 진행 상황입니다!</p>
-    <div class="progress-gallery">
-      <div>
-        <img src="LP1.png" alt="기본섬" />
-        <p>기본 섬</p>
-      </div>
-      <div>
-        <img src="LP2.png" alt="동굴" />
-        <p>동굴</p>
-      </div>
-      <div>
-        <img src="LP3.png" alt="사막섬" />
-        <p>사막 섬</p>
-      </div>
-      <div>
-        <img src="LP4.png" alt="이펙트" />
-        <p>이펙트</p>
-      </div>
+    <div style="margin-top: 40px;">
+      <img src="LP1.png" alt="LP1" style="max-width: 200px; margin: 10px;" />
+      <img src="LP2.png" alt="LP2" style="max-width: 200px; margin: 10px;" />
+      <img src="LP3.png" alt="LP3" style="max-width: 200px; margin: 10px;" />
+      <img src="LP4.png" alt="LP4" style="max-width: 200px; margin: 10px;" />
     </div>
   </div>
 
-  <div id="donate" class="section">
+  <div id="donate" class="page">
     <h2>Donate</h2>
-    <p>후원은 개발에 큰 힘이 됩니다!</p>
+    <p>후원은 준비 중입니다.</p>
   </div>
 
-  <footer>
-    &copy; 2025 Legend Piece Devs. All rights reserved.
-  </footer>
+  <div class="footer">
+    © 2025 Legend Piece Devs. All rights reserved.
+  </div>
 
   <script>
-    const navLinks = document.querySelectorAll("nav a");
-    const sections = document.querySelectorAll(".section");
-
-    navLinks.forEach(link => {
-      link.addEventListener("click", e => {
-        e.preventDefault();
-        navLinks.forEach(n => n.classList.remove("active"));
-        link.classList.add("active");
-
-        const target = link.getAttribute("href").substring(1);
-        sections.forEach(section => {
-          section.classList.remove("active");
-        });
-        document.getElementById(target).classList.add("active");
-      });
-    });
+    function showPage(pageId) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+    }
   </script>
+
 </body>
 </html>
