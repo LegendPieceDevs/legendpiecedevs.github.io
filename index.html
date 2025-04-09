@@ -88,25 +88,36 @@
       display: flex;
     }
 
-    .main-logo {
-      width: 180px;
-      margin-bottom: 20px;
+    .main-top {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 80px;
+      margin-top: -30px;
     }
 
     .main-highlight {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: bold;
-      margin-bottom: 10px;
+      text-align: left;
+      align-self: flex-start;
     }
 
     .main-sub {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: var(--text-sub);
+      text-align: left;
+      margin-top: 5px;
+    }
+
+    .main-logo {
+      width: 160px;
+      align-self: flex-end;
     }
 
     .welcome-title {
       font-size: 2rem;
-      margin-top: 40px;
+      margin-top: 30px;
     }
 
     .welcome-sub {
@@ -185,9 +196,13 @@
 
   <!-- MAIN -->
   <div id="main" class="view active">
-    <div class="main-highlight">The BEST one piece fan game<br>in the Roblox</div>
-    <div class="main-sub">^o^</div>
-    <img src="logo2.png" alt="Legend Piece Logo" class="main-logo" />
+    <div class="main-top">
+      <div>
+        <div class="main-highlight">The BEST one piece fan game<br>in the Roblox</div>
+        <div class="main-sub">^o^</div>
+      </div>
+      <img src="logo2.png" alt="Legend Piece Logo" class="main-logo" />
+    </div>
     <div class="welcome-title">Welcome To Legend Piece!</div>
     <div class="welcome-sub">sry its in dev</div>
   </div>
