@@ -7,262 +7,173 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <style>
     :root {
-      --header-height: 70px;
-      --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --text-color: #222;
-      --header-bg: #a4c8eb;
-      --nav-hover-bg: rgba(255, 255, 255, 0.6);
-      --active-color: #2c4a87;
-      --welcome-color: #1f3a70;
-      --subtext-color: rgba(0, 0, 0, 0.3);
+      --main-color: #ffffff;
+      --accent-color: #814fff;
+      --bg-color: #0a0a13;
+      --text-sub: rgba(255, 255, 255, 0.6);
+      --section-padding: 100px 20px;
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      scroll-behavior: smooth;
     }
 
     body {
-      font-family: var(--main-font);
-      background-color: #d9ecff;
-      color: var(--text-color);
+      background-color: var(--bg-color);
+      color: var(--main-color);
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
     }
 
     header {
-      height: var(--header-height);
-      background-color: var(--header-bg);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 1rem;
-      box-shadow: 0 4px 8px rgba(0, 48, 112, 0.25);
-      position: sticky;
+      position: fixed;
+      width: 100%;
       top: 0;
-      z-index: 1000;
-    }
-
-    .logo-text {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #123c7a;
-      background: linear-gradient(to bottom, #ffffff, #123c7a);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      border: 2px solid #123c7a;
-      padding: 0.2rem 0.6rem;
-      border-radius: 8px;
-    }
-
-    nav {
+      left: 0;
+      padding: 20px 40px;
+      background-color: var(--bg-color);
       display: flex;
-      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.1rem;
     }
 
     nav a {
-      color: #1d2f53;
+      margin-left: 20px;
+      color: var(--main-color);
       text-decoration: none;
-      font-weight: 500;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
       position: relative;
-      transition: all 0.2s ease;
     }
 
-    nav a:hover {
-      background-color: var(--nav-hover-bg);
-      box-shadow: 0 0 0 2px #99bbdd;
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent-color);
+      transition: 0.3s;
     }
 
-    nav a.active {
-      border-bottom: 3px solid var(--active-color);
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
     }
 
-    main {
-      padding: 3rem 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    section {
+      padding: var(--section-padding);
+      min-height: 100vh;
       text-align: center;
     }
 
-    .section {
-      max-width: 800px;
-      width: 100%;
-      margin-bottom: 3rem;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease;
+    .hero {
+      background: radial-gradient(ellipse at center, #11111f 0%, #0a0a13 100%);
     }
 
-    .section.active {
-      opacity: 1;
-      transform: translateY(0);
+    .hero h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-sub);
+    }
+
+    .highlight {
+      color: var(--accent-color);
+      font-weight: bold;
     }
 
     .main-logo {
-      width: 180px;
-      margin-bottom: 1rem;
-    }
-
-    .slogan {
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: #1b305f;
-      margin-bottom: 2rem;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      color: var(--welcome-color);
-      margin-bottom: 1rem;
-    }
-
-    .subtitle {
-      color: var(--subtext-color);
-      font-size: 1.2rem;
-      font-weight: 500;
-      margin-bottom: 2rem;
-    }
-
-    .section p {
-      font-size: 1.05rem;
-      font-weight: 500;
-      margin-bottom: 2rem;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 2rem;
-    }
-
-    ul li {
-      margin-bottom: 1rem;
-      font-size: 1.05rem;
-      color: #102244;
-      font-weight: 600;
+      margin-top: 40px;
+      max-width: 150px;
     }
 
     .progress-gallery {
       display: flex;
-      flex-direction: column;
-      gap: 2rem;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
       margin-top: 2rem;
     }
 
-    .progress-item img {
-      width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    .progress-gallery img {
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     }
 
-    .progress-item p {
-      margin-top: 0.5rem;
-      font-size: 1rem;
-    }
-
-    @media (min-width: 768px) {
-      .progress-gallery {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-      .progress-item {
-        width: 48%;
-      }
-    }
-
-    /* 모바일 메뉴 반응 */
-    @media (max-width: 600px) {
-      nav {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .logo-text {
-        font-size: 1.4rem;
-      }
+    footer {
+      padding: 2rem;
+      color: var(--text-sub);
+      font-size: 0.9rem;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo-text">Legend</div>
-    <nav id="nav">
-      <a href="#main" class="active">메인</a>
-      <a href="#dev">개발자</a>
-      <a href="#progress">개발 진행 상황</a>
-      <a href="#support">후원</a>
+    <div class="logo">Legend</div>
+    <nav>
+      <a href="#main" class="active">Main</a>
+      <a href="#dev">Dev</a>
+      <a href="#progress">Progress</a>
+      <a href="#donate">Donate</a>
     </nav>
   </header>
 
-  <main>
-    <section id="main" class="section active">
-      <img src="logo2.png" alt="Legend Piece 로고" class="main-logo" />
-      <div class="slogan">The BEST one piece fan game in the Roblox</div>
-      <h1>Welcome To Legend Piece!</h1>
-      <p class="subtitle">In Dev...</p>
-      <p>^o^</p>
-    </section>
+  <section class="hero" id="main">
+    <h1>The <span class="highlight">BEST</span> one piece fan game<br>in the Roblox</h1>
+    <p>^o^</p>
+    <img src="logo2.png" alt="Legend Piece" class="main-logo" />
+  </section>
 
-    <section id="dev" class="section">
-      <h1>Developer Introduce</h1>
-      <p>Legend Piece의 개발자들</p>
-      <ul>
-        <li>❄️ <a href="https://www.roblox.com/users/2542821031/profile" target="_blank">sno_w2026</a> - 기획 / 프로그래밍 / 디자인</li>
-        <li>🚶‍♂️ <a href="https://www.roblox.com/users/2058595138/profile" target="_blank">WALK</a> - 디자인 / 홈페이지 제작</li>
-      </ul>
-    </section>
+  <section id="dev">
+    <h2>Welcome To The Legend Piece</h2>
+    <p>sry its in dev</p>
+  </section>
 
-    <section id="progress" class="section">
-      <h1>Progress</h1>
-      <p>현재까지의 개발 진행 상황입니다!</p>
-      <div class="progress-gallery">
-        <div class="progress-item">
-          <img src="LP1.png" alt="기본섬" />
-          <p>🔹 기본섬</p>
-        </div>
-        <div class="progress-item">
-          <img src="LP2.png" alt="동굴" />
-          <p>🔹 동굴</p>
-        </div>
-        <div class="progress-item">
-          <img src="LP3.png" alt="사막섬" />
-          <p>🔹 사막섬</p>
-        </div>
-        <div class="progress-item">
-          <img src="LP4.png" alt="이펙트" />
-          <p>🔹 간단한 이펙트</p>
-        </div>
-      </div>
-    </section>
+  <section id="progress">
+    <h2>Progress</h2>
+    <p>개발 진행 상황입니다!</p>
+    <div class="progress-gallery">
+      <img src="LP1.png" alt="기본섬" />
+      <img src="LP2.png" alt="동굴" />
+      <img src="LP3.png" alt="사막섬" />
+      <img src="LP4.png" alt="이펙트" />
+    </div>
+  </section>
 
-    <section id="support" class="section">
-      <h1>Donate</h1>
-      <p>후원은 게임 개발에 큰 도움이 됩니다. 감사합니다!</p>
-    </section>
-  </main>
+  <section id="donate">
+    <h2>Donate</h2>
+    <p>후원은 개발에 큰 힘이 됩니다!</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Legend Piece Devs. All rights reserved.
+  </footer>
 
   <script>
-    // 섹션 전환
-    const navLinks = document.querySelectorAll('nav a');
-    const sections = document.querySelectorAll('main .section');
+    // 메뉴 클릭 시 활성화 및 부드러운 스크롤
+    const navLinks = document.querySelectorAll("nav a");
 
     navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
+      link.addEventListener("click", function (e) {
         e.preventDefault();
+        navLinks.forEach(n => n.classList.remove("active"));
+        this.classList.add("active");
 
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-
-        const target = document.querySelector(link.getAttribute('href'));
-
-        sections.forEach(s => s.classList.remove('active'));
-        target.classList.add('active');
-
-        target.scrollIntoView({ behavior: 'smooth' });
+        const section = document.querySelector(this.getAttribute("href"));
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     });
   </script>
