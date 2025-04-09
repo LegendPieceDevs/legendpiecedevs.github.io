@@ -1,309 +1,192 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Legend Piece</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="icon" href="favicon.png" type="image/png" />
   <style>
     :root {
-      --header-height: 70px;
       --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --text-color: #222;
-      --header-bg: #a2c8f0;
-      --nav-hover-bg: rgba(255, 255, 255, 0.6);
-      --active-color: #2c4a87;
-      --welcome-color: #1f3a70;
-      --subtext-color: rgba(0, 0, 0, 0.3);
+      --bg-color: #0a0a12;
+      --text-color: #ffffff;
+      --accent-color: #745cf9;
+      --fade-duration: 1.2s;
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
       font-family: var(--main-font);
-      background-color: #d9ecff;
+      background-color: var(--bg-color);
       color: var(--text-color);
+      overflow-x: hidden;
     }
 
     header {
-      height: var(--header-height);
-      background-color: var(--header-bg);
+      width: 100%;
+      padding: 1rem 2rem;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 0 1rem;
-      box-shadow: 0 4px 8px rgba(0, 48, 112, 0.2);
-      position: relative;
-      z-index: 10;
+      align-items: center;
     }
 
-    .logo img {
-      height: 60px;
-      object-fit: contain;
-      transform: translateY(5%);
+    .logo {
+      font-weight: bold;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      animation: blinkLogo 2s infinite alternate;
+    }
+
+    .logo::before {
+      content: "▲";
+      font-size: 1.1rem;
+      margin-right: 0.5rem;
+    }
+
+    @keyframes blinkLogo {
+      0% { opacity: 1; }
+      100% { opacity: 0.7; }
     }
 
     nav {
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
     nav a {
-      color: #1d2f53;
+      color: var(--text-color);
       text-decoration: none;
-      font-weight: 500;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
       position: relative;
-      transition: all 0.2s ease;
+      font-size: 0.9rem;
+      padding-bottom: 3px;
+      transition: all 0.3s ease;
     }
 
-    nav a:hover {
-      background-color: var(--nav-hover-bg);
-      box-shadow: 0 0 0 2px #99bbdd;
-    }
-
-    nav a.active {
-      border-bottom: 3px solid var(--active-color);
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 5px;
-    }
-
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background-color: #1d2f53;
-    }
-
-    .mobile-nav {
-      display: none;
-      flex-direction: column;
+    nav a::after {
+      content: '';
       position: absolute;
-      top: var(--header-height);
-      right: 0;
-      background-color: var(--header-bg);
+      left: 0;
+      bottom: 0;
+      height: 2px;
       width: 100%;
-      padding: 1rem;
-      box-shadow: 0 4px 8px rgba(0, 48, 112, 0.15);
+      background-color: var(--accent-color);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
     }
 
-    .mobile-nav a {
-      margin-bottom: 0.8rem;
+    nav a:hover::after {
+      transform: scaleX(1);
     }
 
-    main {
-      padding: 2.5rem 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+    .hero {
+      text-align: left;
+      padding: 6rem 2rem 4rem;
+      max-width: 1000px;
+      margin: auto;
+      animation: fadeIn 1.5s ease-in-out;
     }
 
-    .section {
-      display: none;
-      max-width: 800px;
-      width: 100%;
-      animation: fadeIn 0.5s ease-in-out;
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 1.4;
     }
 
-    .section.active {
-      display: block;
+    .hero .highlight {
+      color: var(--accent-color);
+      font-weight: 800;
     }
 
-    .main-logo {
-      max-width: 320px;
-      margin-bottom: 1rem;
-    }
-
-    h1 {
-      font-size: 2.3rem;
-      color: var(--welcome-color);
-      margin-bottom: 1rem;
-    }
-
-    .subtitle {
-      color: var(--subtext-color);
-      font-size: 1.2rem;
-      font-weight: 500;
-      margin-bottom: 2rem;
-    }
-
-    .section p {
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 500;
-      color: #333;
-      margin-bottom: 2rem;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
+    .hero p {
       margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #aaa;
     }
 
-    ul li {
+    .logo-img {
+      position: absolute;
+      right: 10%;
+      top: 6rem;
+      width: 200px;
+      animation: floatFade 2s ease-in-out forwards;
+    }
+
+    .main-content {
+      text-align: center;
+      margin-top: 5rem;
+    }
+
+    .main-content h2 {
+      font-size: 1.5rem;
       margin-bottom: 1rem;
-      font-size: 1.05rem;
-      color: #102244;
-      font-weight: 600;
     }
 
-    ul li a {
-      color: #102244;
-      text-decoration: none;
+    .main-content p {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 1.5rem;
     }
 
-    .progress-gallery {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .progress-item img {
-      width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .progress-item p {
-      margin-top: 0.75rem;
-      font-size: 1rem;
-    }
-
-    @media (min-width: 768px) {
-      nav {
-        display: flex;
-      }
-      .hamburger {
-        display: none;
-      }
-      .mobile-nav {
-        display: none !important;
-      }
-      .progress-gallery {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-      .progress-item {
-        width: 48%;
-      }
-    }
-
-    @media (max-width: 767px) {
-      nav {
-        display: none;
-      }
-      .hamburger {
-        display: flex;
-      }
-      .mobile-nav.show {
-        display: flex;
-      }
+    .main-content img {
+      width: 130px;
+      border-radius: 12px;
+      animation: fadeIn 2s ease-in-out;
     }
 
     @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatFade {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media screen and (max-width: 768px) {
+      .logo-img {
+        display: none;
+      }
+
+      nav {
+        gap: 1rem;
+        font-size: 0.85rem;
+      }
+
+      .hero {
+        padding: 4rem 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="logo2.png" alt="Legend Piece 로고" />
-    </div>
-    <nav id="nav">
-      <a href="#" onclick="showSection('main', this)" class="active">메인</a>
-      <a href="#" onclick="showSection('dev', this)">개발자</a>
-      <a href="#" onclick="showSection('progress', this)">개발 진행 상황</a>
-      <a href="#" onclick="showSection('support', this)">후원</a>
+    <div class="logo">Piece</div>
+    <nav>
+      <a href="#">Main</a>
+      <a href="#">Dev</a>
+      <a href="#">Donate</a>
+      <a href="#">Progress</a>
     </nav>
-    <div class="hamburger" onclick="toggleMobileMenu()">
-      <div></div><div></div><div></div>
-    </div>
   </header>
 
-  <div class="mobile-nav" id="mobileNav">
-    <a href="#" onclick="showSection('main', this)">메인</a>
-    <a href="#" onclick="showSection('dev', this)">개발자</a>
-    <a href="#" onclick="showSection('progress', this)">개발 진행 상황</a>
-    <a href="#" onclick="showSection('support', this)">후원</a>
-  </div>
+  <section class="hero">
+    <h1>The <span class="highlight">BEST</span> one piece fan game<br />in the Roblox</h1>
+    <p>^o^</p>
+    <img src="logo2.png" alt="Legend Piece Logo" class="logo-img">
+  </section>
 
-  <main>
-    <div id="main" class="section active">
-      <img src="logo2.png" alt="Legend Piece 메인 로고" class="main-logo" />
-      <h1>Welcome To Legend Piece!</h1>
-      <p class="subtitle">In Dev...</p>
-    </div>
-
-    <div id="dev" class="section">
-      <h1>Developer Introduce</h1>
-      <p>Legend Piece의 개발자들</p>
-      <ul>
-        <li>❄️ <a href="https://www.roblox.com/users/2542821031/profile" target="_blank">sno_w2026</a> - 기획 / 프로그래밍 / 디자인</li>
-        <li>🚶‍♂️ <a href="https://www.roblox.com/users/2058595138/profile" target="_blank">WALK</a> - 디자인 / 홈페이지 제작</li>
-      </ul>
-    </div>
-
-    <div id="progress" class="section">
-      <h1>Progress</h1>
-      <p>현재까지의 개발 진행 상황입니다!</p>
-      <div class="progress-gallery">
-        <div class="progress-item">
-          <img src="LP1.png" alt="기본섬" />
-          <p>🔹 기본섬</p>
-        </div>
-        <div class="progress-item">
-          <img src="LP2.png" alt="동굴" />
-          <p>🔹 동굴</p>
-        </div>
-        <div class="progress-item">
-          <img src="LP3.png" alt="사막섬" />
-          <p>🔹 사막섬</p>
-        </div>
-        <div class="progress-item">
-          <img src="LP4.png" alt="이펙트" />
-          <p>🔹 간단한 이펙트</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="support" class="section">
-      <h1>Donate</h1>
-      <p>후원은 게임 개발에 큰 도움이 됩니다. 감사합니다!</p>
-    </div>
-  </main>
-
-  <script>
-    function showSection(id, el) {
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(section => section.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-
-      const navLinks = document.querySelectorAll('nav a, .mobile-nav a');
-      navLinks.forEach(link => link.classList.remove('active'));
-      el.classList.add('active');
-
-      // 모바일 메뉴 닫기
-      document.getElementById("mobileNav").classList.remove("show");
-    }
-
-    function toggleMobileMenu() {
-      document.getElementById("mobileNav").classList.toggle("show");
-    }
-  </script>
+  <section class="main-content">
+    <h2>Welcome To The Legend Piece</h2>
+    <p>sry its in dev</p>
+    <img src="cute.png" alt="개발 중 이미지">
+  </section>
 </body>
 </html>
