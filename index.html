@@ -10,7 +10,7 @@
       --header-height: 70px;
       --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       --text-color: #222;
-      --header-bg: #aac8e8;
+      --header-bg: #a2c8f0;
       --nav-hover-bg: rgba(255, 255, 255, 0.6);
       --active-color: #2c4a87;
       --welcome-color: #1f3a70;
@@ -25,9 +25,8 @@
 
     body {
       font-family: var(--main-font);
-      background: linear-gradient(to bottom, #ffffff, #e0f7ff, #b2eaff);
+      background-color: #d9ecff;
       color: var(--text-color);
-      min-height: 100vh;
     }
 
     header {
@@ -36,21 +35,21 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 2rem;
+      padding: 0 1rem;
       box-shadow: 0 4px 8px rgba(0, 48, 112, 0.2);
       position: relative;
       z-index: 10;
     }
 
     .logo img {
-      height: 65px;
+      height: 60px;
       object-fit: contain;
       transform: translateY(5%);
     }
 
     nav {
       display: flex;
-      gap: 1.5rem;
+      gap: 1rem;
     }
 
     nav a {
@@ -60,7 +59,7 @@
       padding: 0.4rem 0.8rem;
       border-radius: 6px;
       position: relative;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
     }
 
     nav a:hover {
@@ -70,6 +69,35 @@
 
     nav a.active {
       border-bottom: 3px solid var(--active-color);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #1d2f53;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: var(--header-height);
+      right: 0;
+      background-color: var(--header-bg);
+      width: 100%;
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 48, 112, 0.15);
+    }
+
+    .mobile-nav a {
+      margin-bottom: 0.8rem;
     }
 
     main {
@@ -84,13 +112,11 @@
       display: none;
       max-width: 800px;
       width: 100%;
-      opacity: 0;
-      transition: opacity 0.6s ease;
+      animation: fadeIn 0.5s ease-in-out;
     }
 
     .section.active {
       display: block;
-      opacity: 1;
     }
 
     .main-logo {
@@ -156,19 +182,40 @@
     }
 
     @media (min-width: 768px) {
-      main {
-        padding: 3rem;
+      nav {
+        display: flex;
       }
-
+      .hamburger {
+        display: none;
+      }
+      .mobile-nav {
+        display: none !important;
+      }
       .progress-gallery {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
       }
-
       .progress-item {
         width: 48%;
       }
+    }
+
+    @media (max-width: 767px) {
+      nav {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .mobile-nav.show {
+        display: flex;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -183,7 +230,17 @@
       <a href="#" onclick="showSection('progress', this)">개발 진행 상황</a>
       <a href="#" onclick="showSection('support', this)">후원</a>
     </nav>
+    <div class="hamburger" onclick="toggleMobileMenu()">
+      <div></div><div></div><div></div>
+    </div>
   </header>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#" onclick="showSection('main', this)">메인</a>
+    <a href="#" onclick="showSection('dev', this)">개발자</a>
+    <a href="#" onclick="showSection('progress', this)">개발 진행 상황</a>
+    <a href="#" onclick="showSection('support', this)">후원</a>
+  </div>
 
   <main>
     <div id="main" class="section active">
@@ -195,7 +252,7 @@
     <div id="dev" class="section">
       <h1>Developer Introduce</h1>
       <p>Legend Piece의 개발자들</p>
-      <ul style="margin-top: 2rem;">
+      <ul>
         <li>❄️ <a href="https://www.roblox.com/users/2542821031/profile" target="_blank">sno_w2026</a> - 기획 / 프로그래밍 / 디자인</li>
         <li>🚶‍♂️ <a href="https://www.roblox.com/users/2058595138/profile" target="_blank">WALK</a> - 디자인 / 홈페이지 제작</li>
       </ul>
@@ -233,28 +290,19 @@
   <script>
     function showSection(id, el) {
       const sections = document.querySelectorAll('.section');
-      const navLinks = document.querySelectorAll('nav a');
+      sections.forEach(section => section.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
 
-      sections.forEach(section => {
-        section.classList.remove('active');
-      });
-
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-      });
-
+      const navLinks = document.querySelectorAll('nav a, .mobile-nav a');
+      navLinks.forEach(link => link.classList.remove('active'));
       el.classList.add('active');
 
-      const target = document.getElementById(id);
-      setTimeout(() => {
-        sections.forEach(section => {
-          if (section !== target) section.style.display = 'none';
-        });
-        target.style.display = 'block';
-        setTimeout(() => {
-          target.classList.add('active');
-        }, 10);
-      }, 200);
+      // 모바일 메뉴 닫기
+      document.getElementById("mobileNav").classList.remove("show");
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById("mobileNav").classList.toggle("show");
     }
   </script>
 </body>
