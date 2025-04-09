@@ -86,9 +86,15 @@
 
     .main-content {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding-top: 80px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    .main-logo {
+      max-width: 200px;
+      margin-bottom: 20px;
     }
 
     .main-text {
@@ -102,9 +108,16 @@
       color: var(--text-sub);
     }
 
-    .main-logo {
-      max-width: 200px;
-      margin-top: -30px;
+    .welcome {
+      margin-top: 50px;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .sub-welcome {
+      margin-top: 10px;
+      color: var(--text-sub);
+      font-size: 1rem;
     }
 
     h2 {
@@ -114,6 +127,10 @@
 
     p {
       color: var(--text-sub);
+    }
+
+    .developer, .progress-gallery {
+      text-align: center;
     }
 
     .developer {
@@ -149,18 +166,11 @@
       font-size: 0.9rem;
     }
 
-    .centered-title {
+    #dev, #progress, #donate {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
-      margin-top: 40px;
-      font-size: 2.2rem;
-      font-weight: bold;
-    }
-
-    .sub-text {
-      text-align: center;
-      margin-top: 10px;
-      color: var(--text-sub);
-      font-size: 1rem;
     }
 
     footer {
@@ -187,23 +197,20 @@
 
   <!-- MAIN -->
   <div id="main" class="view active">
-    <div class="centered-title">Welcome To Legend Piece!</div>
-    <div class="sub-text">sry its in dev</div>
     <div class="main-content">
+      <img src="logo2.png" alt="Legend Piece" class="main-logo" />
       <div class="main-text">
         The <span class="highlight">BEST</span> one piece fan game<br />in the Roblox
         <p>^o^</p>
       </div>
-      <img src="logo2.png" alt="Legend Piece" class="main-logo" />
+      <div class="welcome">Welcome To Legend Piece!</div>
+      <div class="sub-welcome">sry its in dev</div>
     </div>
   </div>
 
   <!-- DEV -->
   <div id="dev" class="view">
-    <div class="centered-title">Welcome To Legend Piece!</div>
-    <div class="sub-text">sry its in dev</div>
     <h2>Developers</h2>
-    <p>이 게임은 열정 넘치는 개발자들에 의해 제작되고 있습니다.</p>
     <div class="developer">
       <h3><a href="https://www.roblox.com/users/2542821031/profile" target="_blank">sno_w2026</a></h3>
       <p>기획 / 스크립팅 / 디자인</p>
@@ -216,8 +223,6 @@
 
   <!-- PROGRESS -->
   <div id="progress" class="view">
-    <div class="centered-title">Welcome To Legend Piece!</div>
-    <div class="sub-text">sry its in dev</div>
     <h2>Progress</h2>
     <p>개발 진행 상황입니다!</p>
     <div class="progress-gallery">
@@ -242,8 +247,6 @@
 
   <!-- DONATE -->
   <div id="donate" class="view">
-    <div class="centered-title">Welcome To Legend Piece!</div>
-    <div class="sub-text">sry its in dev</div>
     <h2>Donate</h2>
     <p>후원은 개발에 큰 힘이 됩니다!</p>
   </div>
